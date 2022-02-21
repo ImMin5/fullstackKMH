@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	li{list-style-type:none;}
+	#main{
+		
+		width:300px; margin:50px auto; padding:20px;
+		text-align:center; border: 2px solid #ddd; overflow:auto;
+	}
+	
+	
+	#main>div{
+		float:left; 
+		width:50%;
+	}
+	#main>div>input{
+		width:80%;
+	}
+	
+	#main>ul>li:nth-child(2n+1){width:30%;}
+	#main>ul>li:nth-child(2n){width:70%;}
+	#main>ul>li:nth-child(3){width:50%;}
+	#main>ul>li:nth-child(4){width:50%;}
+</style>
+<script>
+
+
+</script>
+<body>
+<div id="main">
+			이메일
+			<input type="email" id="email" checked/><input type="button" value="확인" onclick="splitEmail()"/>
+			<hr/>
+			<div>
+				아이디 <br/> <input type="text" id="id"/>
+			</div>
+			<div>
+				도메인 <br/> <input type="text" id="domain"/>
+			</div>
+</div>
+</body>
+</html>

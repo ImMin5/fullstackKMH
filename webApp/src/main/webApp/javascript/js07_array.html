@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	//배열 생성 : 배열의 크기가 유동적이고, 배열의 데이터형이 고정적이지 않다.
+	var arr = new Array();
+	arr[2] = 100;
+	arr[5] = "홍길동";
+	
+	for(var i=0; i<arr.length; i++){
+		document.write("arr[",i,"]", arr[i], "<br/>");
+	}
+	
+	//배열생성시 초시값을 가질때
+	var arr2 = new Array(45,98,36,'banana', 2, 34, 75, 'apple');
+	var arr3 = [33,'1221','Kim',"김민호",'1222'];
+	
+	document.write(arr2, "<br/>");
+	document.write(arr3, "<br/>");
+	
+	arr2.push('push end');
+	document.write(arr2, "<br/>");
+	
+	//배열의 문자 join하기 -> 원소 사이에  ',' 대신 '/' 출력
+	var joinData = arr2.join(",");
+	document.write(joinData,"<br/>");
+	
+	//배열의 데이터 (마지막)제거
+	arr2.pop();
+	document.write(arr2, "<br/>");
+	
+	//배열의 데이터가 왼쪽 또는 오른쪽으로 이동
+	//shift() : right-> left로 이동
+	//unshift() : left -> right으로 이동
+	
+	arr3.shift();
+	document.write(arr3,"<br/>");
+	
+	arr3.unshift("역삼동");
+	document.write(arr3,"<br/>");
+
+	//Json방식으로 데이터 처리하기
+	var jsonData = {
+			username : '홀길동', tel : "010-1234-5678", addr: "강남구 역삼동",
+			email : {
+				firstEmail: "abcd@nate.com",
+				second : "xyz@naver.com"
+			},
+			msg : function(){
+				console.log("콘솔에 문자 찍음");
+			}
+	}
+	document.write("이름",jsonData.username, "<br/>");
+	document.write("이름",jsonData.email);
+	console.log(jsonData);
+	</script>
+
+</body>
+</html>

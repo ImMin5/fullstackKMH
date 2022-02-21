@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+	ul,li{
+		maring:0; padding:0; list-style-type:none;
+	}
+	#cal{
+		width:500px;
+		border: 2px solid red;
+		margin : 0px auto;
+	}
+	#cal>img{
+		height:200px;
+	}
+	#cal>h2{
+		text-align:center;
+	}
+	#cal>ul{
+		list-style:none;
+		margin:0;
+		padding:0;
+	}
+	#cal>ul>li{
+		width:14.2%;
+		float: left;
+		text-align:center;
+	}
+</style>
+<script>
+	function setDate(){
+		var now = new Date();
+		var y = now.getFullYear();
+		var m = now.getMonth();
+		var d = now.getDate();
+		
+		//1일에 대한 요일 
+		var w = new Date(y,m,1).getDay();
+		console.log("dddd"+w);
+		// 마지막 구하기  , 이번달을 기준으로 다음달 0일을 날짜 객체로 만든다.
+		
+		var lastDay = new Date(y, m+1, 0).getDate();
+		
+		//년 월 셋팅
+		document.querySelector("#dateTitle").innerHTML = y + "년" +(m+1) + "월";
+		var weekName=['일','월','화','수','목','금','토'];
+		
+		var dateTag="";
+		for(var i=0; i<weekName.length; i++){
+			dateTag += "<li>" + weekName[i] + "</li>";
+		}
+		
+		for(var i=0; i<w; i++){
+			dateTag += "<li>&nbsp;</li>";
+		}
+		
+		
+		for(var i=1; i<lastDay; i++){
+			if(i==d){
+				dateTag += "<li class='today'>"+i+"</li>";
+			}
+			else
+				dateTag += "<li>"+i+"</li>";
+		}
+		console.log(dateTag);
+		document.getElementById('dateView').innerHTML = dateTag;
+	}
+	
+	
+</script>
+</head>
+
+<body onload="setDate();">
+<div id="cal">
+	<h2 id="dateTitle"></h2>
+	<img src="../img/01.jpg" width="100%;"/>
+	<ul id="dateView"></ul>
+</div>
+<a href="ex04_popupMenu.html">팝업메뉴</a>
+</body >
+</html>

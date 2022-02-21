@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$(function(){
+		//console.log($("div:last").css("font-size"));
+		$("button").on('click', function(){
+			var idx = $("button").index(this);
+			var size = parseFloat($("div:last").css("font-size"));
+			if(idx == 0){ //점점 작게
+				size--;
+			}
+			else if(idx==1){
+				size=16;
+			}
+			else if(idx==2){
+				size++;
+			}
+			$("div").last().css("font-size",size+"px");
+		});
+	})
+	$(document).ready(function(){
+		$("h3").text("남은 글자 수 : "+ $("#textarea").attr('maxlength'));
+	})
+	$(document).on('keyup',function(){
+		var max = $("#textarea").attr('maxlength');
+		var num = max-parseInt($("textarea").val().length);
+		console.log(max);
+		$("h3").text("남은 문자수 :"+num);
+	});
+</script>
+
+</head>
+<body>
+<div>
+	<button>-</button>
+	<button>0</button>
+	<button>+</button>
+</div>
+<div> 
+이변은 없었습니다. 러시아 올림픽위원회 소속 카밀라 발리예바는 어제(15일) 중국 베이징 캐피털 인도어 스타디움에서 열린 2022 베이징 동계올림픽 피겨스케이팅 여자 싱글 쇼트프로그램에서 기술점수 44.51점과 예술점수 37.65점으로, 총점 82.16점을 기록하며 1위에 올랐습니다.
+
+발리예바는 경기를 마친 뒤 울먹였지만 러시아를 제외한 다른 나라의 반응은 싸늘했습니다. 발리예바는 단 한마디 인터뷰도 남기지 못한 채 경기장을 떠나야 했습니다.
+
+발리예바는 내일 열리는 여자 싱글 프리스케이팅 경기에도 출전합니다. 하지만 발리예바가 종합 순위 3위 안에 들면 피겨스케이팅 여자 싱글 경기의 마스코트와 메달 시상식은 열리지 않습니다.
+
+경기에 앞서 국제올림픽위원회가 이 경우 도핑 조사와 출전 자격 심사를 마칠 때까지 시상식을 열지 않겠다고 발표했기 때문입니다.
+
+발리예바의 도핑 파문으로 동계올림픽의 꽃, 피겨스케이팅은 베이징 동계올림픽 최대 스캔들이 됐습니다. 도핑 파문은 올림픽이 폐회한 뒤에도 이어질 전망입니다.
+
+■ 3살 때 올림픽 챔피언을 꿈꾼 피겨 신동
+
+러시아의 타타르스탄 자치공화국 수도 카잔에서 태어난 발리예바는 2006년 4월생입니다. 3살 때부터 스케이트와 발레, 체조를 시작했습니다.
+
+한 종목만 하자는 어머니의 권유에, 발리예바는 스케이트를 선택했습니다. 발리예바는 한 인터뷰에서 세 살 무렵부터 어머니에게 "올림픽 챔피언이 되고 싶어!"라고 얘기했다고 밝혔습니다.
+
+발리예바에게 피겨스케이팅을 가르친 지도자들은 한목소리로 그녀가 타고난 재능을 가졌다고 말합니다. 3살 때 그녀를 가르친 크세니아 이바노바는 "발리예바는 동갑내기들보다 진도가 빨랐다. 무엇보다 재능이 있었고, 성실함에 더해 능력과 욕심도 있었다."고 로이터에 밝혔습니다.
+</div>
+<div>
+<h3></h3>
+<textarea id="textarea" maxlength=100>
+
+</textarea>
+</div>
+</body>
+</html>

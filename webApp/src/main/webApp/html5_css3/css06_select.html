@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css" type="text/css">
+
+<style>
+/*
+	동위 선택자
+	: 기준이 되는 선택자와 같은 위치에 있는 태그를 선택한다.
+	 + : 선택자의 다음 객체를 선택한다.
+	 ~ : 선택자의 다음에 있는 모든 객체
+*/
+	h1+h2{
+		background:pink;
+	}
+	h1~h2{
+		color:blue;
+	}
+	/*상태 선택자*/
+	/* focus : 커서가 컴포넌트를 선택시*/
+	#username:focus{
+		color:orange; font-size:1.5em;
+	}
+	/* disabled */
+	input:disabled{
+		border:2px solid red;
+	}
+	
+	input:checked{
+		width:50px; height:50px;
+	}
+</style>
+
+</head>
+<body>
+<pre>
+
+</pre>
+
+<form>
+ 	이름 <input type="text" name="username" id="username" value="hong gildong" readonly/><br/>
+ 	아이디 <input type="text" name="userid" value="gildong" disabled/><br/>
+ 	관심 : <input type="checkbox" name="interest"> 축구 <input type="checkbox" name="interest"> 축구
+ 		<input type="checkbox" name="interest"> 축구  <input type="checkbox" name="interest"> 축구 
+ 		<br/>
+ 	취미 : <input type="radio" name = hobby"/> 영화감상 <input type="radio" name="hobby"/> 영화감상
+ 		  <input type="radio" name="hobby"/> 영화감상  <input type="radio" name="hobby"/> 영화감상
+</form>
+
+<h1>통위선택자 테스트 11</h1>
+<h2>통위선택자 테스트 2</h2>
+<h2>통위선택자 테스트 3 </h2>
+<h2>통위선택자 테스트 4 </h2>
+<h2>통위선택자 테스트5</h2>
+<h2>통위선택자 테스트6</h2>
+<h3>---------------------</h3>
+<h1>통위선택자 테스트a</h1>
+<h2>통위선택자 테스트b</h2>
+<h2>통위선택자 테스트c</h2>
+<h2>통위선택자 테스트d</h2>
+<h2>통위선택자 테스트e</h2>
+<h2>통위선택자 테스트f</h2>
+<h3>---------------------</h3>
+
+
+</body>
+
+
+</html>

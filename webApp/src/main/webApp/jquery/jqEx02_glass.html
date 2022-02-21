@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("body").css("margin","0px");
+		//pink
+		$("body").append("<div id='pink'></div>");
+		$("#pink").css("height","40px").css("background-color","#EF899A");
+		
+		//blue
+		$("body").append("<div id='blue'></div>");
+		$("#blue").css("height","22px").css("background-color","#5AB1CA");
+		
+		
+		//이미지 추가
+		$("body").append("<img id='main_img' src='../img/title_layer.gif'>");
+		$("body").append("<img id='glass1' class='glass' src='../img/glass1.gif'/>");
+		$("body").append("<img id='glass2' class='glass' src='../img/glass2.gif'/>");
+		$("body").append("<img id='glass3' class='glass' src='../img/glass3.gif'/>");
+		
+		
+		$("img").css("position","absolute");
+		
+		
+		$("img:first").css("top","0px").css("z-index","0");
+		$("img:eq(1)").css("left","300px").css("top","60px").css("z-index","10");
+		$("img").eq(2).css("left","450px").css("top","80px").css("z-index","20");
+		$("img").last().css("top","110px").css("left","350px");
+	
+	});
+	
+
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	
+	$(function(){
+		console.log("ddd");
+	});
+	jQuery(document).ready(function(){
+		console.log("제이 쿼리 실행됨 ...");
+	})
+	$(function(){
+		//css()  : 제이쿼리에서 시타일 시트 사용하기
+		//내장객체, 태그, 아디디, 클래스
+		//			속성, 속성값
+		$("h1").css("color","blue").css("background-color","lightblue")
+			.css("font-family","궁서체");
+		$(".c1").css("background-color","#ddd");
+		$("img").css("border","5px red soild");
+	
+		
+		//html의 속성 사용하기
+		//attr() :html 속성 사용하기
+		$("#txt").attr("type","password");
+		
+		//prop() : html의 속성중 속성명만으로 처리되는 속성을 사용하기
+		$("#txt").prop("readonly",true);
+	});
+</script>
+</head>
+<body>
+<input type="text" id="txt"/>
+<h1>제이쿼리에서 html사용하기</h1>
+<h2 class="c1">제이쿼리 테스트</h2>
+<h2 class="c1">제이쿼리 테스트</h2>
+<img src="../img/01.jpg"/>
+</body>
+</html>

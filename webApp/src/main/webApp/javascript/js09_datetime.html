@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	//날짜 , 시간을 처리하는 함수
+	var now = new Date();
+	document.write("현재 날짜와 시간 -> ", now);
+	
+	var date = new Date('2022.09.22');
+	var date2 = new Date(456743534523);
+	
+	document.write("<br/> date ->", date);
+	document.write("<br/> date2 ->", date2);
+	/*
+		년 getFullYear(), 울 : getMonth , 일: getDate()
+		시 getHours, 	 분 : getMinutes()	초 : getSeconds()
+		요일 : getDay() -> 0(일요일), 1(월요일), ...
+	
+		2022-02-09(수) 	
+	*/
+	
+	var y = now.getFullYear();
+	var m = now.getMonth()+1;
+	var d = now.getDate();
+	
+	var w = now.getDay();
+	
+	var h = now.getHours();
+	var mi = now.getMinutes();
+	
+	
+	var week = "";
+	switch(w){
+		case 0: week = "일" ; break;
+		case 1: week = "월" ; break;
+		case 2: week = "화" ; break;
+		case 3: week = "수" ; break;
+		case 4: week = "목" ; break;
+		case 5: week = "금" ; break;
+		case 6: week = "토" ; break;
+	}
+	
+	document.write("<br/>",y,"-",m,"-",d,"(",week,")",h,":",mi);
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<style>
+	div,img{width:100px; height:100px; position:absolute;}
+	div{background:orange;}
+</style>
+<script>
+	$(function(){
+		$("#i1").animate({marginLeft:"1000px",width:"200px",marginTop:"500px",opacity:0.3},5000)
+		.animate({marginTop:"10px",opacity:1.0},3000);
+		
+		$("#i2").animate({marginLeft:"1200px"},6000)
+		.animate({marginLeft:"0px",marginTop:"800px"},5000);
+		
+		//delay() : 애미메이션 출발전 대기 시간 설정
+		$("#i3").delay(3000).animate({marginLeft:"500px",marginTop:"500px",width:"200px"},5000);
+		
+		//stop
+		$("#i1,#i2,#i3").mouseover(function(){
+			$(this).stop(true);
+		});
+	});
+</script>
+<body>
+<div id="i1">
+	ANIMATE
+</div>
+<img id="i2" src="../img/01.jpg"/>
+<img id="i3" src="../img/03.jpg"/>
+
+</body>
+</html>

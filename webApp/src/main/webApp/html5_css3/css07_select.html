@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+ /* 구조 선택자 
+ 	2n : 짝수번째 객체 , 2n+1 : 홀수 번째 객체, 3n : 3의 배수의 번째 객체 선택
+ 	: nth-child()
+ */
+ 
+ 	#lst>li:nth-child(2n){
+ 		background:black;
+ 	}
+ 	
+ 	#lst>li:first-child{
+ 		color:orange;
+ 	}
+ 	#lst>li:last-child{
+ 		color:gray; font-size:1.2em;
+ 	}
+ 	body{
+ 		margin:30px;
+ 	}
+ 	/*그림자 설정*/
+ 	
+ 	#lst>li{
+ 		font-size:1.2em; margin-bottom:30px; border:1px solid #bbb;	
+ 	}
+ 	
+ 	#lst>li{
+ 		text-shadow:5px 5x 5x green;
+ 	}
+ 	/*박스 또는 글자에 그림자 표시*/
+ 	#lst>li{
+ 		box-shadow:10px 5px 5px #ddd;
+ 	}
+</style>
+
+</head>
+<!-- 
+	html 속성
+	oncontextmenu : 마우스 오른쪽키 사용 제어
+	
+	onselectstart : 선택시작 불가능
+	
+	ondragstart : 드래그 시작 불가능
+ -->
+<body oncontextmenu="return false" onselectstart="return false">
+<pre>
+
+</pre>
+<ul id="lst">
+	<li>11</li>
+	<li>22</li>
+	<li>33</li>
+	<li>44</li>
+	<li>55</li>
+	<li>66</li>
+	<li>77</li>
+</ul>
+<style>
+	/* 구조 선택자
+		:first-of-type : 처음객체
+		:last-of-type : 마지막 객체
+		:nth-of-type(2n) : 2n짝수번째, 2n+1홀수
+	*/
+	#lst2>li:nth-of-type(2n){background:yellow;}
+	#lst2>li:nth-of-type(2n+1){background:orange;}
+	#lst2>li:first-of-type{font-size:2em;}
+	#lst2>li:last-of-type{color:green;}
+</style>
+
+<ul id="lst2">
+	<li>11</li>
+	<li>22</li>
+	<li>33</li>
+	<li>44</li>
+	<li>55</li>
+	<li>66</li>
+	<li>77</li>
+</ul>
+
+<style>
+	/*텍스트 스타일*/
+	/*
+		::first-letter -> 문단의 첫번째 문자에 스타일 적용
+	*/
+	
+	#txt::first-letter{
+		font-size:2em; background:pink; font-weight:bold; color:red;
+	}
+	#txt::first-line{
+		text-decoration:underline;
+	}
+</style>
+
+<div id="txt" >
+국내 토종 레깅스 전문 브랜드인 젝시믹스 안다르 뮬라웨어가 정체된 시장에서 새로운 성장 동력을 찾기 위해 분주하다. 몸에 딱 달라붙는 레깅스로 애슬레저 시장을 키워온 이들 세 기업은 이제 화장품, 골프웨어는 물론 NFT(대체불가능토큰) 투자로까지 눈을 돌리고 있다.
+</div>
+</body>
+
+
+</html>

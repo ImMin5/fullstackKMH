@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+	/*
+		이벤트 종류
+		onclick : 마우스 클릭 시 
+		
+		onmouseover :마우스 오버 (하위 객체도 각각 오버 이벤트가 발생한다.)
+		onmouseenter : 마우스 오버시( 하위 객체가 별도로 이벤트가 발생하지 않는다.)
+		
+		onmouseout : 마우스 아웃 
+		onmouseleave : 마우스 아웃기
+		
+		
+		onmousedown : 마우스 누른 상탱
+		onmouseup : 마우스를 누른후 놓으면
+		onmousemove : 마우스 룸직이면 
+		
+		onfocus : 객체가 요소에 들어오면
+		onblur : 객체에 요소가 나가면
+		
+		onsubmit : form에서 submit이 발생되면 
+		onreset : fomr에서 reset이 발생되면
+		
+		onkeydown : 키를 누른 상태 일때
+		onkeypress : 키를 누른 상태 일때
+		onkeyup : 키를 누른 후 놓으면
+		
+		onchange : value의 값이 바뀌면 발생
+		
+		onresize : 컨테이너 크기 변하면 
+		onload : 로딩이 완료되면 호출되는 이벤트
+		
+		
+	*/
+</script>
+<style>
+	#d1{
+		height:200px; padding:30px; background:pink;
+	}
+	#d2{
+		height:100px; background:yellow; padding:20px;
+	}
+	#h1{
+		background:lightblue;
+	}
+</style>
+<script>
+	var cnt = 0;
+	function eventTest(){
+		document.getElementById("h1").innerHTML = "마우스 오버(" + cnt++ +")";
+	}
+	function changeBack(){
+		document.getElementById("id").style.background="orange";
+	}
+	
+	function resetTest(){
+		document.getElementById("r").value = "리셋이벤트 발생함";
+	}
+	//숫자만 입력 가능하도록 설정하기
+	function telNumbercheck(){
+		//event 내장객체에 현재 누른 키의 키값을 가지고 있다.
+		//event.keyCode : 누른키의 키값을 가진다.
+		//event.returnValue : ture, false
+		//48-57
+		console.log(event.keyCode);
+		if(event.keyCode>=48 && event.keyCode<=57 || event.keyCode==8){
+			event.returnValue = true;
+		}else{ //숫자와의 키를 누른경우
+			event.returnValue = false; 
+		}
+	}
+</script>
+<body onresize="console.log('resize')">
+<form onsubmit="" onreset="resetTest()">
+	아이디 : <input type="text" name="id" id="id" onfocus="changeBack()" onblur="this.style.background='yellow'"  onchange="console.log('changeEvent발생')"/>
+	이름 : <input type="text" name="name" id="name"/><br/>
+	연락처 : <input tpye="text" name="tel" onkeydown="telNumbercheck()"/><br/>
+	<input type="reset" id="r" value="다시쓰기"/>
+</form>
+<!--<div id="d1" onmouseover="console.log('이벤트 발생')" onmouseout="console.log('마우스 아웃')"> -->
+<div id="d1" onmouseover="eventTest()" onmouseleave="console.log('mouseleave event')">
+	<div id="d2">
+		<h1 id="h1">마우스 오버</h1>
+	</div>
+<img src ="../img/03.jpg" onmouseenter="this.src='../img/03.jpg'" onmouseleave=""/>
+</div>
+
+</body>
+</html>

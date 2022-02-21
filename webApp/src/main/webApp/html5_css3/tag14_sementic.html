@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset ="UTF-8">
+<title> html 태그 연습</title>
+<style>
+	/* 초기화 */
+	body,ul,li{
+		margin:0; padding:0; list-style-type:none;
+	}
+	/* HEADER */ 
+	header{
+		height:50px; background:pink;
+		
+	}
+	header>nav>ul>li{
+		float:left; height:50px; width:50%; line-height:50px; text-align:center;
+	}
+	body>section{width:1200px; maring: 0 auto;}
+	body>section>*{float:left;}
+	aside{
+		width:200px;
+		background-color:gray;
+	}
+	.content{
+		width:1000px;
+	}
+	
+	/*푸터*/
+	footer{
+		height:30px; background:green;
+	}
+</style>
+<!-- 
+	 header : 페이지 상단
+	 nav : 링크 걸린곳
+	 section : 컨텐츠
+	 article : 글이 많은 내용
+	 aside : 사이드 메뉴
+	 footer : 페이지 하단
+ -->
+</head>
+<body>
+<header> 
+	<nav>
+		<ul>
+			<li><a href="#">메뉴1</a></li>
+			<li><a href="#">메뉴2</a></li>
+	
+		</ul>
+	</nav>
+</header>
+<section>
+	<aside>
+		<ul>
+			<li>aaaaaa</li>
+			<li>bbbb</li>
+			<li>cccc</li>
+		</ul> 
+	</aside>
+	<section class="content">
+		<h1>시멘틱태그</h1>
+		<article>글이 많은 내용</article>
+		<img src="../img/01.jpg"/>
+	</section>
+</section>
+<footer>
+	페이지 하단
+	<nav>고객센터</nav>
+</footer>
+</body>
+</html>

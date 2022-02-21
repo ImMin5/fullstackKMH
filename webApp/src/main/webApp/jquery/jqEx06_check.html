@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+	ul,li{margin:0; padding:0; list-style-type:none;}
+	#container{
+		width:1000px; margin:0 auto;
+	}
+	#boaderList>li{
+		float:left; 
+		height:40px; 
+		line-height:40px; 
+		border-bottom:1px solid #ccc;
+		width:10%;
+	}
+	
+	/*제목*/
+	#boaderList>li:nth-child(6n+3){width:50%;}
+	/*블럭의 범위를 넘는 내용 줄임표시(...)으로 설정하는 스타일*/
+	.wordCut{
+		white-space: nowrap;/*줄바꿈 하지 않게*/
+		overflow : hidden; /*범위를 벗어나면 숨김*/
+		text-overflow:ellipsis; /*문자가 범위를 넘으면 ...을 표시*/
+	}
+</style>
+<script>
+	$(function(){
+		$("#allChk").change(function(){
+			console.log("check");
+			$("input[name=chk]").attr("checked",this.checked)
+			//$("input[name=chk]").prop("checked",this.checked);
+		});
+	});
+</script>
+</head>
+<body>
+<div id="container">
+	<h1>게시판 목록</h1>
+	<ul id="boaderList">
+		<li><input type="checkbox" name="chk" id="allChk"/>전체선택</li>
+		<li>번호</li>
+		<li>제목</li>
+		<li>작성자</li>
+		<li>조회수</li>
+		<li>등록일</li>
+		
+		<li><input type="checkbox" name="chk"/></li>
+		<li>1</li>
+		<li class="wordCut">123123ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd123</li>
+		<li>123123123</li>
+		<li>123213123</li>
+		<li>2020-01-01</li>
+		
+		<li><input type="checkbox" name="chk"/></li>
+		<li>1</li>
+		<li class="wordCut">123123123</li>
+		<li>123123123</li>
+		<li>123213123</li>
+		<li>2020-01-01</li>
+		
+		<li><input type="checkbox" name="chk"/></li>
+		<li class="wordCut" >1</li>
+		<li>123123123</li>
+		<li>123123123</li>
+		<li>123213123</li>
+		<li>2020-01-01</li>
+		
+		<li><input type="checkbox" name="chk"/></li>
+		<li class="wordCut" >1</li>
+		<li>123123123</li>
+		<li>123123123</li>
+		<li>123213123</li>
+		<li>2020-01-01</li>
+		
+	</ul>
+</div>
+
+</body>
+</html>

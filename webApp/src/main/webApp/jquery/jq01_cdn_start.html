@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	var num = 100;
+	function jsView(){
+		document.getElementById("test").innerHTML = "자바스크립트 함수에서 발생"
+	}
+	
+	$(document).ready(function(){
+		   // process.. 
+		$("#test2").html("<h1>jquery로 구현된 위치이다.</h1>");
+	});
+</script>
+</head>
+<body onload="jsView()">
+<div id="test"></div>
+<div id="test2"></div>
+</body>
+</html>

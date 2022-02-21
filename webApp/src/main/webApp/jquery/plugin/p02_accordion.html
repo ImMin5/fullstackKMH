@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+	https://github.com/alaingoga 에서 다운 
+	1.accordionImageMenu.css
+	2.jquery
+	3.jquery-ui
+	4.accordion
+ -->
+ <link rel="stylesheet" href="css/accordionImageMenu.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../jquery-ui.min.js"></script>
+<script src="js/jquery.accordionImageMenu.js"></script>
+<script>
+	$(function(){
+		$("#acco").AccordionImageMenu({
+			position:'horizontal'
+			,openItem:3 //기본선택목록, index위치의 목록을 크게 봄
+			,openDim:500//확장된 목록의 크기
+			,closeDim:200 //닫힌 목록의 크기
+			,height:800
+			,duration:3000
+			,border:2
+			,effect:"easeOutBounce"
+			
+		});
+	});
+</script>
+</head>
+<body>
+<ul id="acco">
+	<li><a href="https://nate.com"><img src="../../img/01.jpg"/></a></li>
+	<li><a href="https://nate.com"><img src="../../img/03.jpg"/></a></li>
+	<li><a href="https://nate.com"><img src="../../img/01.jpg"/></a></li>
+	<li><a href="https://nate.com"><img src="../../img/03.jpg"/></a></li>
+	<li><a href="https://nate.com"><img src="../../img/01.jpg"/></a></li>
+</ul>
+</body>
+</html>

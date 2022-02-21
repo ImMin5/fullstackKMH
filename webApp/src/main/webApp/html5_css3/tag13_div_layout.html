@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset ="UTF-8">
+<title> html 태그 연습</title>
+
+<style>
+	body{
+		margin:0;
+	}
+	#top{
+		height:100px; background:#ddd
+	}
+	
+	#top>div{float:left}
+	#top>div:first-child{width:70%;}
+	#top>div:last-child{width:30%;text-align:right;}
+	
+	#header{
+		height:100px; background:lightblue;
+	}
+	#header>div{
+		height:100px; background:olive;
+		width:1200px;
+		margin: 0 auto;
+	}
+	
+	/* 컨텐츠 */
+	#mainContents{
+		width:1200px; margin: 0 auto;
+		background:#ddd;
+		overflow:auto; /*컨텐츠 내용만큼 길이 확보*/
+	}
+	#mainContents>div{float:left;}
+	#mainContents>div:first-child{width:1000px;}
+	#mainContents>div:last-child{width:1000px;}
+	
+	/*푸터*/
+	#bottom {
+		height:50px; text-align:center;
+		background:#666; color:#fff;
+	}
+</style>
+</head>
+<body>
+
+<div id="top">
+	<div style="background:yellow" >메뉴1</div>
+	<div style="background:pink" >로그인 회원가입 고객센터</div>
+</div>
+<div id="header">
+	<div>투번째 탑</div>
+</div>
+<div id="mainContents">
+	<div style="background-color:red;">
+		<ul>
+			<li>자주하는 질문</li>
+			<li>Q&A</li>
+			<li>회원가입</li>
+			<li>커뮤니티</li>
+		</ul>
+	</div>
+	<div>
+		<img src="../img/01.jpg"/>
+		<img  src="../img/02.png"/>
+		<img  src="../img/01.jpg"/>
+	</div>
+</div>
+
+<div id="bottom">Footer</div>
+<pre>
+</pre>
+
+</body>
+</html>

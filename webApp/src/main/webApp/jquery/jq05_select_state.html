@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$(function(){
+		//상태 선택자
+		//속성값이 text인 객체를 선택하기
+		$(":text").css("width","300px").css("height","40px");
+		
+		//check속성에 대한 선택자 - checked속성이 설정되어 있을 때 해제한다.
+		//$(":checked").attr("checked",false);
+		$(":checked").prop("checked",false);
+		$(":selected").attr("selected",false);
+		
+		//-------------------------------------
+		//컨텐츠 선택자
+		//contains() : 특정 문자를 포함한 경우 선택한다.
+		$("p:contains('여자')").css("background-color","red");
+		
+		//has(): 특정태그를 포함한 경우 선택한다.
+		$("p:has('b')").css("background-color","pink");
+		
+		//not() : 특정 선택자를 제외한 나머지를 선택한다.
+		$("p:not(:first)").css("color","green");
+		
+		//closest() : 조상 선택자
+		$("i").closest("body").css("border","3px dotted green");
+		
+		//filter
+		$("p").filter('.c1').css("color","#fff").css("background","#000");
+		
+		//contents():특정선택자의 하위가 다른 태그가 포함된 경우 선택자
+		$("p").contents().css("color","red");
+		
+		
+	});
+</script>
+</head>
+<body>
+<div>
+	<p>도핑 규정을 위반한 피겨 스케이팅 신기록 제조기 카밀라 발리예바(16·러시아올림픽위원회)가 15일 시작하는 2022 베이징 동계올림픽 여자 싱글 경기에 출전하게 됐다.</p>
+	<p class="c1"><b>duididi</b>베이징 올림픽</p>
+	<p class="c1">이에 따라 발리예바는 15일 <i>피겨</i> 쇼트프로그램에 예정대로 출전한다.</p>
+</div>
+	<form>
+		<label>이름</label>
+		<input type="text" name="username" id="username"/><br/>
+		<label>연락처</label>
+		<input type="text" name="tel" id="tel"/><br/>
+		<label> 사용자 동의 여부</label>
+		<input type="radio" name="accept" value="yes" checked>동의
+		<input type="radio" name="accept" value="yes" >비동의
+		<label>자주가는 사이트</label>
+		<select name ="site" id="site">
+			<option value="not">====직접선택====</option>
+			<option value="daum" selected>daum.net</option>
+			<option value="nate">nate.com</option>
+			<option value="naver">naver.com</option>
+		</select>
+	</form>
+</body>
+</html>

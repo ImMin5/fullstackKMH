@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title> ul ol </title>
+</head>
+<body>
+<h1>행열의 수가 다른 표 만들기</h1>
+
+<pre>
+	태그
+	table태그 : 표의 시작과 끝
+	tr: 줄 범위
+	td: 칸 범위 -> 컨텐츠를 표시하는 곳
+	colgroup  : 칸을 그룹으로 만든다.
+	caption : 표의 제목(table태그 범위 안에있어야함)
+	
+	thead : 표의 상단
+	tbody : 표의 본문
+	tfoot : 표의 하단
+	
+	속성
+	width height
+	border : 선 두께	
+</pre>
+<table border="10"> 
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>5555</td>
+		<td colspan="2">6666</td>
+		<td rowspan="2">7777</td>
+	</tr>
+	<tr>
+		<td>8888</td>
+		<td rowspan="2">9999</td>
+		<td>0000</td>
+	</tr>
+	<tr>
+		<td>aa</td>
+		<td colspan="2" >bb</td>
+	</tr>
+</table>
+</body>
+</html>

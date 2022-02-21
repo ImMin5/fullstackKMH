@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function clockStart(){
+			var now = new Date();
+			var h = now.getHours();
+			var m = now.getMinutes();
+			var s = now.getSeconds();
+			document.getElementById("timeView").innerHTML = h+ ':' + m + ':'+s;
+	}
+	//setInterval(호출할 함수, 시간(밀리초) ): 일정 시간 간격으로 함수를 재 호출해 주는 함수
+</script>
+</head>
+<body onload="setInterval('clockStart()',1000)">
+	<h1 id="timeView"> 현재시간 </h1>
+</body>
+</html>

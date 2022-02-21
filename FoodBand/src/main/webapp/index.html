@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<meta charset="UTF-8">
+<meta name="viewport" content="width-device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<title>Get Together</title>
+<style>
+	ul,li{list-style-type:none;}
+	body{}
+	a{text-decoration:none; color:black;}
+	a:visited{text-decoration:none;}
+	#navbar_toggle > ul > li{
+		color:black;
+		margin: 0 auto;
+	}
+
+	#main>.container-fluid{padding-top : 10px;padding-botttom : 10px;}
+	.card{margin:0 auto;width:90%;}
+
+	#main{height:70%; padding-top:20px;}
+	#section1{ width:90%; min-height:40%;}
+	#img_section{text-align:center;}
+	#img_section>#img_section_banner{
+		 width:100%;
+		 height:100%;
+    	object-fit:cover;
+	}
+	#login_form{
+		margin:0 auto;
+		width:90%;
+	}
+
+	#login_form>div:nth-child(5)>#btn_login{width:100%; border:1px solid #bcb1ae; background-color:#C38F5C;}
+	#login_form > div:nth-child(6){text-align:center;}
+	#login_form > div:nth-child(6)>a{color:#C38F5C;}
+	
+	
+
+</style>
+<script>
+	$(function(){
+		$("#footer_year").text(new Date().getFullYear());
+	});
+</script>
+</head>
+<body>
+<div id="wrap">
+		<nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+			<div id="header" class="container-fluid">
+				<a id="brand_logo" class="navbar-brand" href="index.html"><img src="static/logo/horizontal_logo.png" width="130" alt=""></a>
+				<button class="navbar-toggler" id="naver_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_toggle" >
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
+					<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="login.html">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="signup.html">회원 가입</a></li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</nav>
+	<main id="main">
+		<div id="section1" class="container-fluid">
+			<div class="row">
+				<div id="img_section" class="col"><img id="img_section_banner" class="img-fluid" src="static/img/banner_02.png"/></div>
+				<div id="login_section" class="col">
+					<form class="center-block" id="login_form">
+					<h3 class="h3">우리끼리 Get Together!</h3>
+					<h6 class="h6">지금 바로 모이세요.</h6>
+					  <div class="mb-3">
+					    <input type="text" class="form-control" id="userid" placeholder="아이디">
+					  </div>
+					  <div class="mb-3">
+					    <input type="password" class="form-control" id="pw" placeholder="비밀번호">
+					  </div>
+					  <div class="mb-3">
+					    <input type="submit" class="btn btn-primary" id="btn_login" value="로그인">
+					  </div>
+					  <div>아이디가 없으신가요? <a href="signup.html">회원가입</a></div>				
+					</form>
+				</div>
+			</div>
+		</div><!-- section1 end -->
+		<div id="section2" class="container-fluid">
+			<div class="card mb-3" >
+			  <div class="row g-0">
+			    <div class="col-md-4">
+			      <img src="static/img/intro_01.jpg" class="img-fluid rounded-start" alt="...">
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title">Card title</h5>
+			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="card mb-3">
+			  <div class="row g-0">
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title">Card title</h5>
+			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			      </div>
+			    </div>
+			    <div class="col-md-4">
+			      <img src="static/img/intro_02.jpg" class="img-fluid rounded-start" alt="...">
+			    </div>			    
+			  </div>
+			</div>
+			<div class="card mb-3">
+			  <div class="row g-0">
+			    <div class="col-md-4">
+			      <img src="static/img/intro_03.jpg" class="img-fluid rounded-start" alt="...">
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title">Card title</h5>
+			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>	
+		</div><!-- section2 end -->
+		
+	</main>
+	<div id="bottombar"></div>
+	<footer id="bg-light text-center text-lg-star">
+	  
+	  <!-- Copyright -->
+	  <div class="text-center p-3" style="background-color: #C38F5C;">
+	    © 2022-<span id="footer_year"></span> Copyright:
+	    <a class="text-dark" href="#">Get Together</a>
+	  </div>
+  	<!-- Copyright -->
+	</footer>
+</div>
+</body>
+</html>

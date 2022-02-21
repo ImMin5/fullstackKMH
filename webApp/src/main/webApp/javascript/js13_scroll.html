@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function scrollTest(){
+		var sX = window.scrollX;
+		var sY = window.scrollY;
+		console.log(sX,sY);
+	}
+	
+	function scrollAutoMove(){
+		window.scrollBy(0,10);
+	}
+	var x=0; y=0;
+	function backMove(){
+		document.body.style.backgroundPosition = x+"px " + y + "px";
+		x+=5;
+		y+=5;
+		
+	}
+</script>
+<style>
+	body{background:url(../img/03.jpg)}
+</style>
+</head>
+<!--  <body onload="scrollTest(); setInterval('scrollAutoMove()',500);"> -->
+<body onload="scrollTest(); setInterval('backMove()',500)">
+<script>
+	for(var i=1; i<=10; i++){
+		if(i<10)
+			document.write('<img src="../img/01.jpg"/>');
+		else
+			document.write('<img src="../img/02.png"/>');
+	}
+</script>
+</body>
+</html>

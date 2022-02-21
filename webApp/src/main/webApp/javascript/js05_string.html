@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+	var txt = "자바스크립트를 이용한 문자열 처리"
+	
+	document.write("length->", txt.length, "<br/>");
+	document.write("indexOf->", txt.indexOf("스크립트"),"<br/>");
+	document.write("search->" , txt.search("스크 립트"), "<br/>");
+	
+	//문자열 일부 구하기 slice(index, index), substring(index, index), substr(index, count)
+	
+	document.write("slice->",txt.slice(2,6),"<br/>")
+	document.write("slice->", txt.substring(2,6),"<br/>");
+	document.write("substr->", txt.substr(2,4), "<br/>");
+	txt = txt.replace("자바스크립트","javascript");
+	document.write("replace->" ,txt.replace("자바스크립트","javascript"),"<br/>");
+	
+	document.write(txt,"<br/>");
+	
+	//toUpperCase(), toLowerCase();
+	var txt2 = "Javascript String Text..";
+	document.write("toUpperCase->", txt2.toUpperCase(),"<br/>");
+	document.write("toLowerCase->", txt2.toLowerCase(), "<br/>");
+	
+	document.write("concat -> ", txt.concat(txt2)+"<br/>");
+	document.write("charAt -> ", txt.charAt(2)+"<br/>");
+	document.write("chCodeAt->", txt.charCodeAt(2),"<br/>");
+	document.write("chCodeAt->", txt.charCodeAt(12),"<br/>");
+	
+	var arr = txt2.split("t");
+	for(var i=0; i<arr.length; i++){
+		document.write("arr[", i, "]=", arr[i], "<br/>");
+	}
+	
+	function splitEmail(){
+		var email = document.getElementById("email").value;
+		var arr = document.querySelector("#email").value.split("@");
+		
+		if(email.indexOf("@") == -1 || arr.length<2){
+			alert("이메일을 입력해 주세요.");
+			return;
+		}
+		
+		document.querySelector("#id").value=arr[0];
+		document.querySelector("#domain").value=arr[1];
+
+		
+		
+	}
+</script>
+<style>
+	
+</style>
+<body>
+<div id="main">
+			이메일
+			<input type="email" id="email" checked/><input type="button" value="확인" onclick="splitEmail()"/>
+			<hr/>
+			<div>
+				아이디 <br/> <input type="text" id="id"/>
+			</div>
+			<div>
+				도메인 <br/> <input type="text" id="domain"/>
+			</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function htmlCtr(){
+		document.getElementById("i").src="../img/02.png";
+	}
+	
+	function imgChange(){
+		document.querySelector("#i").src="../img/01.jpg";
+	}
+</script>
+</head>
+<body>
+<img id="i" src="../img/01.jpg" onmouseover="htmlCtr()" onmouseout="imgChange()"/>
+</body>
+</html>

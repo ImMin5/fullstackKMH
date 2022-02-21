@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!--
+	https://github.com/stevenwanderski/bxslider-4에서 다운로드   
+	1.jquery
+	2.easing
+	3.bxslider 스크립트 
+ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="vendor/jquery.easing.1.3.js"></script>
+<script src="js/jquery.bxslider.js"></script>
+<link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
+<style>
+	ul,li{margin:0; padding:0}
+	#slider img{width:100%; height:400px;}
+</style>
+<script>
+		$(function(){
+			$("#slider").bxSlider({
+				mode: 'horizontal' //기본 ->'horizontal', 'vertical', 'fade'
+				,slideWidth:800
+				,slideHeight:450
+				,speed:2000
+				,auto:true //자동시작
+				,randomStart:true
+				,captions: true
+				//,adaptiveHeight:true
+				//,controlls: true
+				,useCSS:false //easing을 true(사용 못함) ,false(사용함)
+				,easing:'easeOutElastic'
+				,onSliderLoad:function(){
+					//alert("이미지 로딩 완료");
+				}
+				,onSlideAfter:function(){
+					console.log("onslideAfter함수");
+				}
+			});
+		});
+</script>
+</head>
+<body>
+	<ul id="slider">
+		<li><a href="https://www.nate.com"></a><img src="../../img/01.jpg" title="네이트 홈페이지"/></li>
+		<li><a href="https://www.nate.com"></a><img src="../../img/02.png"/></li>
+		<li><a href="https://naver.com"></a><img src="../../img/01.jpg"/></li>
+		<li><a href="../jqEx06.listCheck.html"></a><img src="../../img/01.jpg"/></li>
+		<li><a href="https://www.google.com"></a><img src="../../img/01.jpg"/></li>
+		<li><a href="https://www.nate.com"></a><img src="../../img/01.jpg"/></li>
+		<li><a href="https://www.nate.com"></a><img src="../../img/02.png"/></li>
+		<li><a href="https://www.nate.com"></a><img src="../../img/01.jpg"/></li>
+	</ul>
+</body>
+</html>

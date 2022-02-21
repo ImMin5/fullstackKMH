@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 
+	1.jquery-ui.css
+	2.jquery
+	3.jquery-ui.js
+ -->
+ <link rel="stylesheet" href="../jquery-ui.min.css" type="text/css"/>
+ <script src="../jquery-ui.min.js"></script>
+ <style>
+ 	#dialogOpen{text-align:center; background-color:#ddd; height:50px;}
+ 	#result{
+ 		width:600px; margin: 0 auto;
+ 		background-color:pink;
+ 		text-align:center;
+ 	}
+ 	#dialog>input{width:100%;}
+ </style>
+ <script>
+ 	$(function(){
+ 		//다이얼 열기
+ 		$("#dialogOpen").on('click',function(){
+ 			$("#dialog").dialog("open");
+ 		})
+ 		
+ 		//다이얼로그 셋팅
+ 		$("#dialog").dialog({
+ 			autoOpen:true//실행시 자동열림 설정 (true,false)
+ 			,buttons:{
+ 				submit: function(){
+ 					var name = $("#event-name").val();
+ 					var date = $("#event-date").val();
+ 					
+ 					$("#result").append("<p>"+date+":" + name+ "</p>");
+ 					
+ 					//폼의 값을 초기화
+ 					$("#event-name").val('');
+ 					$("#event-date").val('');
+ 				},
+ 				reset:function(){
+ 					//폼의 값을 초기화
+ 					$("#event-name").val('');
+ 					$("#event-date").val('');
+ 				},
+ 				close:function(){
+ 					//폼의 값을 초기화
+ 					$("#event-name").val('');
+ 					$("#event-date").val('');
+ 					$("#dialog").dialog("close");
+ 				},
+ 				
+ 			}//buttons
+ 			,modal:false
+ 		});
+ 		
+ 		//DatePicker 셋팅
+ 		$("#event-date").datepicker({
+ 			dateFormat:'yy-mm-dd',
+ 			numberOfMonths:3,
+ 		});
+ 	});
+ </script>
+</head>
+<body>
+<div id="dialogOpen"> 일정등록</div>
+<hr/>
+<div id="result">일정이 표시되는 곳</div>
+<!-- 다이얼로그 창 -->
+<div id="dialog" title="JQuery UI Dialog"> <!-- 다이얼로그 창에 제목으로 사용됨 -->
+	<h2>일정을 등록하세요</h2>
+	<label for="event-name">일정이름 : </label><input type="text" id="event-name"/>
+	<label for="event-date">날짜선택:</label><input type="text" id="event-date">
+</div>
+</body>
+</html>
