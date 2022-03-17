@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.campus.myapp.dao.DataDAO">
+ 	<insert id="dataInsert">
+ 		insert into databoard(subject, content, userid, filename1, filename2)
+ 		values(#{subject}, #{content}, #{userid}, #{filename1}, #{filename2})
+ 	</insert>
+ 	<select id="dataSelectAll" resultType="com.campus.myapp.vo.DataVO">
+ 		select no, subject, userid, date_format(writedate, '%y-%m-%d %H:%i') writedate, filename1, filename2
+ 		from databoard order by writedate
+ 	</select>
+ 	<select id="dataView">
+ 		select no , subject, userid, content, writedate, filename1, filename2
+ 		from databoard where no=${param1}
+ 	</select>
+	<select id="dataSelect" resultType="com.campus.myapp.vo.DataVO">
+  		select no, subject, content, userid, writedate, filename1, filename2
+  		from databoard where no=#{param1}
+  	</select>
+ </mapper>
