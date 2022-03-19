@@ -4,14 +4,14 @@ import com.campus.myapp.vo.MemberVO;
 
 public interface MemberService {
 	
-	//È¸¿øµî·Ï
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int memberInsert(MemberVO vo);
-	//·Î±×ÀÎ
+	//ï¿½Î±ï¿½ï¿½ï¿½
 	public MemberVO loginCheck(MemberVO vo);
-	//È¸¿øÁ¤º¸ ¼öÁ¤(Æû)
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½)
 	public MemberVO memberSelect(String userid);
-	//È¸¿øÁ¤º¸¼öÁ¤(DB)
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(DB)
 	public int memberUpdate(MemberVO vo);
-	//Áßº¹Ã¼Å©
+	//ï¿½ßºï¿½Ã¼Å©
 	public int idCheck(String userid);
 }

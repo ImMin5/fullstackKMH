@@ -5,13 +5,13 @@ import java.util.List;
 import com.campus.myapp.vo.ReplyVO;
 
 public interface ReplyDAO {
-	//´ñ±Ûµî·Ï
+	//ëŒ“ê¸€ë“±ë¡
 	public int replyWrite(ReplyVO vo);
-	//ˆ®±Û¸ñ·Ï
+	//ëŒƒê¸€ëª©ë¡
 	public List<ReplyVO> replyList(int no);
-	//´ñ±Û¼öÁ¤
+	//ëŒ“ê¸€ìˆ˜ì •
 	public int replyEdit(ReplyVO vo);
-	//´ñ±Û»èÁ¦
+	//ëŒ“ê¸€ì‚­ì œ
 	public int replyDel(int replyno, String userid);
 
 }

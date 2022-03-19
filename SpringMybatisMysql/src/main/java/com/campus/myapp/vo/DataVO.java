@@ -10,7 +10,7 @@ public class DataVO extends Object {
 	private String filename1;
 	private String filename2;
 	
-	//»èÁ¦ÇÒ ÆÄÀÏ¸íÀ» ´ãÀ» º¯¼ö 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	private String []delFile;
 	
 	public int getNo() {

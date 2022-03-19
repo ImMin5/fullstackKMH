@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
@@ -29,5 +30,13 @@
 		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
 	<!-- dao 관련 설정 (위치 알려줌) -->
+	
+	<!-- 트랜잭션처리를 위해서 namespace tx 추가
+		dataSouce를 이용하여 transaction 객체를 생성한다. 
+	 -->
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
+	 </bean>
+
 	<mybatis-spring:scan base-package="com.campus.myapp.dao"/>
 </beans>

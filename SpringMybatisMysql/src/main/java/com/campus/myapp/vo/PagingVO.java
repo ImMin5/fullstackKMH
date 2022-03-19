@@ -1,21 +1,21 @@
 package com.campus.myapp.vo;
 
 public class PagingVO {
-	//ÆäÀÌÂ¡
-	private int onePageRecord = 5; //ÆäÀÌÁö´ç Ãâ·ÂÇÒ ·¹ÄÚµå ¼ö
-	private int pageNum = 1; //ÇöÀç ÆäÀÌÁö
-	private int totalRecord; //ÃÑ ·¹ÄÚµå ¼ö 
+	//ï¿½ï¿½ï¿½ï¿½Â¡
+	private int onePageRecord = 10; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½
+	private int pageNum = 1; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int totalRecord; //ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ 
 	private int totalPage;
 	private int offsetIndex = 0;
-	private int onePageCount = 5; //ÇÑ¹ø¿¡ ÆäÀÌÁö ¼ö 
+	private int onePageCount = 5; //ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
 	private int startPage = 1;
 	
-	//°Ë»ö
+	//ï¿½Ë»ï¿½
 	private String searchKey;
 	private String searchWord;
 	
 	
-	//°Ë»ö
+	//ï¿½Ë»ï¿½
 	public int getOnePageRecord() {
 		return onePageRecord;
 	}
@@ -27,7 +27,7 @@ public class PagingVO {
 	}
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
-		//offset À§Ä¡ °è»ê
+		//offset ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
 		offsetIndex = (pageNum-1) * onePageRecord;
 		
 		startPage = ((pageNum-1)/onePageCount*onePageCount)+1;

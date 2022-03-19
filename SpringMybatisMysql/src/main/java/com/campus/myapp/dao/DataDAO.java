@@ -1,14 +1,17 @@
 package com.campus.myapp.dao;
 
-import java.util.List;
 
+import java.util.List;
 import com.campus.myapp.vo.DataVO;
 
 public interface DataDAO {
-	//ÀÚ·á½Ç ±Û ¾²±â
+	//ìë£Œì‹¤ ê¸€ ì“°ê¸°
 	public int dataInsert(DataVO vo);
-	// ÀÚ·á½Ç ±Û ¸®½ºÆ®
+	// ìë£Œì‹¤ ê¸€ ë¦¬ìŠ¤íŠ¸
 	public List<DataVO> dataSelectAll();
-	// ÀÚ·á½Ç ±Û º¸±â
+	// ìë£Œì‹¤ ê¸€ ë³´ê¸°
 	public DataVO dataSelect(int no);
+	public DataVO getFileName(int no);
+	public int dataUpdate(DataVO vo);
+	public int dataDelete(int no, String userid);
 }

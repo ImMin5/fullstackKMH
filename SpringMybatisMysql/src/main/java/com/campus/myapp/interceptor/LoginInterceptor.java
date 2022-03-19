@@ -7,23 +7,23 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-	//ÄÁÆ®·Ñ·¯°¡ È£ÃâµÇ±âÀü¿¡ ½ÇÇàµÉ ¸Þ¼Òµå
+	//ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		//false  : ·Î±×ÀÎÀ¸·Î º¸³»
-		//true : ÇØ´ç ÄÁÆ®·Ñ·¯·Î ÀÌµ¿ÇÑ´Ù.
+		//false  : ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//true : ï¿½Ø´ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 		
-		//request°´Ã¼¿¡¼­ session°´Ã¼¸¦ ¾ò¾î¿À±â
+		//requestï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ sessionï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		HttpSession session = request.getSession();
 		
-		//·Î±×ÀÎ »óÅÂ ±¸ÇÏ±â
+		//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
 		String logStatus = (String)session.getAttribute("logStatus");
 		
 		if(logStatus != null && logStatus.equals("Y")) {
-			//·Î±×ÀÎ µÊ
+			//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
 			return true;
 		}
 		else {
-			//·Î±×ÀÎ »óÅÂ ¾Æ´Ô
+			//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½
 			response.sendRedirect(request.getContextPath()+"/member/loginForm");
 			return false;
 		}

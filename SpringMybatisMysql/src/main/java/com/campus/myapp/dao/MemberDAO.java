@@ -5,15 +5,15 @@ import com.campus.myapp.vo.MemberVO;
 public interface MemberDAO {
 	
 	//int or Integer
-	//È¸¿øµî·Ï
+	//íšŒì›ë“±ë¡
 	public int memberInsert(MemberVO vo);
-	//·Î±×ÀÎ
+	//ë¡œê·¸ì¸
 	public MemberVO loginCheck(MemberVO vo);
-	//È¸¿øÁ¤º¸ ¼öÁ¤ Æû
+	//íšŒì›ì •ë³´ ìˆ˜ì • í¼
 	public MemberVO memberSelect(String userid);
-	//È¸¿øÁ¤º¸¼öÁ¤(DB)
+	//íšŒì›ì •ë³´ìˆ˜ì •(DB)
 	public int memberUpdate(MemberVO vo);
 	
-	//Áßº¹Ã¼Å©
+	//ì¤‘ë³µì²´í¬
 	public int idCheck(String userid);
 }

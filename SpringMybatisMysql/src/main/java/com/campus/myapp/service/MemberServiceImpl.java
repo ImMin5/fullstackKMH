@@ -11,7 +11,7 @@ import com.campus.myapp.vo.MemberVO;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	@Inject //Dao¸¦ °´Ã¼ »ý¼ºÇÑ´Ù.  @AutoWired
+	@Inject //Daoï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.  @AutoWired
 	MemberDAO dao;
 	
 	@Override

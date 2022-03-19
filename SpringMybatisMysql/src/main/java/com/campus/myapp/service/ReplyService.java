@@ -5,13 +5,13 @@ import java.util.List;
 import com.campus.myapp.vo.ReplyVO;
 
 public interface ReplyService {
-	//´ñ±Ûµî·Ï
+	//ï¿½ï¿½Ûµï¿½ï¿½
 	public int replyWrite(ReplyVO vo);
-	//ˆ®±Û¸ñ·Ï
+	//ï¿½ï¿½ï¿½Û¸ï¿½ï¿½
 	public List<ReplyVO> replyList(int no);
-	//´ñ±Û¼öÁ¤
+	//ï¿½ï¿½Û¼ï¿½ï¿½ï¿½
 	public int replyEdit(ReplyVO vo);
-	//´ñ±Û»èÁ¦
+	//ï¿½ï¿½Û»ï¿½ï¿½ï¿½
 	public int replyDel(int replyno, String userid);
 
 

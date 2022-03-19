@@ -18,6 +18,7 @@
 		$("#dataFrm b").click(function(){
 			console.log("22");
 			$(this).parent().css("display","none");
+			$(this).parent().next().attr("value","");
 			$(this).parent().next().attr("name","delFile");
 			$(this).parent().next().next().attr("type","file");
 		})
@@ -32,13 +33,16 @@
 				return false;
 			}
 			
+			let fileCount=0;
 			
 			
 			//첨부 파일 선택 갯수
 			if($("#filename1").val() != ''){
+				console.log($("#filename1").val());
 				fileCount++;
 			}
 			if($("#filename2").val() != ''){
+				console.log($("#filename2").val());
 				fileCount++;
 			}
 			
@@ -48,7 +52,6 @@
 				return false;
 			}
 			
-			return false;
 		});
 	});
 </script>
@@ -66,7 +69,7 @@
 				<!-- 첫번째 첨부파일 -->
 				<div>${vo.filename1 } &nbsp;&nbsp; <b>X</b></div>
 				<!-- x를 누르면 삭제 파일명이 있는 input의 name속성값을 delFile -->
-				<input type="hidden" name="" value="${vo.filename1}"/>
+				<input type="hidden" name="" id="filename1" value="${vo.filename1}"/>
 				<!-- x를 누르면 파일이 삭제되고 새로운 파일 선택이 선택 가능하도록 input만들어 준다. -->
 				<input type="hidden" name="filename" id="filename1"/>
 			</li>

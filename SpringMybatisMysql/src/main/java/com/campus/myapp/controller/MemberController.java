@@ -21,7 +21,7 @@ public class MemberController {
 	@Inject
 	MemberService service;
 	
-	//È¸¿ø°¡ÀÔ ÆûÀ¸·Î ÀÌµ¿ÇÏ´Â ¸ÅÇÎ
+	//íšŒì›ê°€ì… í¼ìœ¼ë¡œ ì´ë™í•˜ëŠ” ë§¤í•‘
 	@GetMapping("memberForm")
 	public String memberForm() {
 		System.out.println("memberForm");
@@ -29,48 +29,48 @@ public class MemberController {
 	}
 	
 	
-	//È¸¿ø µî·Ï
+	//íšŒì› ë“±ë¡
 	@RequestMapping(value="memberOk", method=RequestMethod.POST)
 	public String memberFormOk(MemberVO vo, Model model) {
 		int cnt = service.memberInsert(vo);
 		
-		//Å¬¶óÀÌ¾ğÆ® ÆäÀÌÁö·Î insert °á°ú¸¦ º¸³¿
+		//í´ë¼ì´ì–¸íŠ¸ í˜ì´ì§€ë¡œ insert ê²°ê³¼ë¥¼ ë³´ëƒ„
 		model.addAttribute("cnt", cnt);
 		
 		return "member/memberResult";
 	}
 	
-	//·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+	//ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™
 	@GetMapping("loginForm")
 	public String loginForm() {
 		return "member/loginForm";
 	}
 	
-	//·Î±×ÀÎ
+	//ë¡œê·¸ì¸
 	@PostMapping("loginOk")
 	public ModelAndView loginOk(MemberVO vo, HttpSession session) {
-		//requset userid, userpw¿Í ÀÏÄ¡ÇÏ´Â ·¹ÄÚµå ¼±ÅÃ
+		//requset userid, userpwì™€ ì¼ì¹˜í•˜ëŠ” ë ˆì½”ë“œ ì„ íƒ
 		System.out.println("login : " + vo.getUserid() + " " + vo.getUserid());
 		MemberVO mvo = service.loginCheck(vo);
 		ModelAndView mav = new ModelAndView();
 		
-		//·Î±×ÀÎ ¼º°ø: session¿¡ ¾ÆÀÌµğ¿Í ÀÌ¸§À» ÀúÀåÇÑ´Ù. -> È¨ÆäÀÌÁö·Î ÀÌµ¿
+		//ë¡œê·¸ì¸ ì„±ê³µ: sessionì— ì•„ì´ë””ì™€ ì´ë¦„ì„ ì €ì¥í•œë‹¤. -> í™ˆí˜ì´ì§€ë¡œ ì´ë™
 		 if(mvo != null) {
 			 System.out.println("login ok");
 			 session.setAttribute("logId", mvo.getUserid());
 			 session.setAttribute("logName", mvo.getUserid());
 			 session.setAttribute("logStatus", "Y");
 			 System.out.println("login mvo : " + mvo.getUserid()  + " " + mvo.getUserpwd());
-			 //ÄÁÆ®·Ñ·¯¿¡¼­ ´Ù¸¥ ÄÁÆ®·Ñ·¯ ¸ÅÇÎÁÖ¼Ò¸¦ ¹Ù·Î È£ÃâÇÑ´Ù.(Á¢¼Ó)
+			 //ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë‹¤ë¥¸ ì»¨íŠ¸ë¡¤ëŸ¬ ë§¤í•‘ì£¼ì†Œë¥¼ ë°”ë¡œ í˜¸ì¶œí•œë‹¤.(ì ‘ì†)
 			 mav.setViewName("redirect:/");
-		 }else {//·Î±×¸° ½ÇÆĞ : ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+		 }else {//ë¡œê·¸ë¦° ì‹¤íŒ¨ : ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™
 			 System.out.println("login failed");
 			 mav.setViewName("redirect:loginForm");
 		 }
 		
 		return mav;
 	}
-	//·Î±×¾Æ¿ô
+	//ë¡œê·¸ì•„ì›ƒ
 	@GetMapping("logout")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -79,7 +79,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//È¸¿øÁ¤º¸ ¼öÁ¤ (Æû)
+	//íšŒì›ì •ë³´ ìˆ˜ì • (í¼)
 	@GetMapping("memberEdit")
 	public ModelAndView memberEdit(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -90,11 +90,11 @@ public class MemberController {
 		mav.setViewName("member/memberEdit");
 		return mav;
 	}
-	//È¸¿ø Á¤º¸ ¼öÁ¤ (DB)
+	//íšŒì› ì •ë³´ ìˆ˜ì • (DB)
 	@PostMapping("memberEditOk")
 	public ModelAndView memberEdit(MemberVO vo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		//session ·Î±×ÀÎ ¾ÆÀÌµğ...
+		//session ë¡œê·¸ì¸ ì•„ì´ë””...
 		
 		System.out.println("memberEdit start");
 		vo.setUserid((String)session.getAttribute("logId"));
@@ -104,7 +104,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//¾ÆÀÌµğ Áßº¹°Ë»ç 
+	//ì•„ì´ë”” ì¤‘ë³µê²€ì‚¬ 
 	@PostMapping("memberIdCheck")
 	@ResponseBody
 	public int idCheck(String userid) {

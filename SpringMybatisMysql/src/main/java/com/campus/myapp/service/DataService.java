@@ -5,10 +5,13 @@ import java.util.List;
 import com.campus.myapp.vo.DataVO;
 
 public interface DataService {
-	//ÀÚ·á½Ç ±Û ¾²±â
+	//ï¿½Ú·ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int dataInsert(DataVO vo);
-	// ÀÚ·á½Ç ±Û ¸®½ºÆ®
+	// ï¿½Ú·ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<DataVO> dataSelectAll();
-	// ÀÚ·á½Ç ±Û º¸±â
+	// ï¿½Ú·ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public DataVO dataSelect(int no);
+	public DataVO getFileName(int no);
+	public int dataUpdate(DataVO vo);
+	public int dataDelete(int no, String userid);
 }

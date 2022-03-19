@@ -32,7 +32,7 @@ public class MemberVO {
 		this.username = username;
 	}
 	public String getTel() {
-		// tel1, tel2, tel3¸¦ ÇÏ³ªÀÇ µ¥ÀÌÅÍ·Î getÇÒ¶§ ¸¸µé¾î ÁØ´Ù,
+		// tel1, tel2, tel3ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ getï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½,
 		tel = tel1+"-"+tel2+"-"+tel3;
 		return tel;
 	}

@@ -19,4 +19,16 @@
   		select no, subject, content, userid, writedate, filename1, filename2
   		from databoard where no=#{param1}
   	</select>
+  	
+  	<select id="getFileName" resultType="com.campus.myapp.vo.DataVO">
+  		select filename1, filename2 from databoard where no=#{param1}
+  	</select>
+  	<update id="dataUpdate">
+  		update databoard set subject=#{subject}, content=#{content},
+  		filename1=#{filename1}, filename2=#{filename2}
+  		where no=${no} and userid=#{userid}
+  	</update>
+  	<delete id="dataDelete">
+  		delete from databoard where no=#{param1} and userid =#{param2}
+  	</delete>
  </mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <script>
-	function delCheck(){
+	function dataDelCheck(){
 		if(confirm("삭제하시겠습니까?")){
 			//확인버튼 눌렀을 경우
 			location.href = "/myapp/data/dataDel?no=${vo.no}";
@@ -149,7 +149,7 @@
 		<!-- 로그인 아이디와 글쓴이가 같은 경우 수정 삭제 표시 -->
 		<c:if test="${logId == vo.userid }">
 			<a href="/myapp/data/dataEdit?no=${vo.no}">수정</a>
-			<a href="javascript:delCheck()">삭제</a>
+			<a href="javascript:dataDelCheck()">삭제</a>
 		</c:if>
 	</div>
 	<hr/>
