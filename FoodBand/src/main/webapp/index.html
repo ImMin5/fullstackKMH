@@ -5,11 +5,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width-device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet"> <!-- 폰트  -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> <!-- 부트스트랩 아이콘 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <title>Get Together</title>
 <style>
+	*{font-family: 'MaruBuri';}
 	ul,li{list-style-type:none;}
 	body{}
 	a{text-decoration:none; color:black;}
@@ -23,29 +26,73 @@
 	.card{margin:0 auto;width:90%;}
 
 	#main{height:70%; padding-top:20px;}
-	#section1{ width:90%; min-height:40%;}
+	#section1{ width:90%; min-height:40%; max-height:40%;}
 	#img_section{text-align:center;}
-	#img_section>#img_section_banner{
-		 width:100%;
-		 height:100%;
-    	object-fit:cover;
-	}
-	#login_form{
-		margin:0 auto;
-		width:90%;
-	}
 
 	#login_form>div:nth-child(5)>#btn_login{width:100%; border:1px solid #bcb1ae; background-color:#C38F5C;}
 	#login_form > div:nth-child(6){text-align:center;}
 	#login_form > div:nth-child(6)>a{color:#C38F5C;}
 	
 	
-
+	/*반응형 스타일 적용하기*/
+	/*320px ~ 600px*/
+	/* all,screen, print, tv, projection... */
+	@media all and (min-width:320px) and (max-width:600px) {
+		#img_section>#img_section_banner{width:88%;float:right;}
+		#login_section>#login_form{
+			float:left;
+			margin:0 auto;
+			padding:0;
+			width:95%;
+			font-size:10px;
+		}	
+	}
+	/*601px~ 900px*/
+	@media all and (min-width:601px) and (max-width:900px){
+		#img_section>#img_section_banner{width:75%;float:right;}
+		#login_section>#login_form{
+		font-family: 'MaruBuri';
+			float:left;
+			margin:0 auto;
+			padding:0;
+			width:95%;
+			font-size:10px;
+		}	
+	}
+	/*901~*/
+	@media all and (min-width:901px){
+		#img_section>#img_section_banner{width:70%;object-fit:cover;float:right;}
+		#login_section>#login_form{
+			float:left;
+			margin:0 auto;
+			width:90%;
+			font-size:12px;
+		}
+		
+	}
 </style>
 <script>
 	$(function(){
 		$("#footer_year").text(new Date().getFullYear());
 	});
+	
+	function login_check(){
+		
+		var userid = document.getElementById('userid');
+		var pw = document.getElementById("pw");
+		if(userid.value == ""){
+			alert("아이디를 입력해 주세요.");
+			userid.focus();
+			return false;
+		}
+		if(pw.value == ""){
+			alert("비밀번호를 입력해 주세요.");
+			pw.focus();
+			return false;
+		}
+		return true;
+	}
+	
 </script>
 </head>
 <body>
@@ -69,9 +116,9 @@
 	<main id="main">
 		<div id="section1" class="container-fluid">
 			<div class="row">
-				<div id="img_section" class="col"><img id="img_section_banner" class="img-fluid" src="static/img/banner_02.png"/></div>
+				<div id="img_section" class="col"><img id="img_section_banner" class="img-fluid" src="static/img/banner_03.png"/></div>
 				<div id="login_section" class="col">
-					<form class="center-block" id="login_form">
+					<form class="center-block" id="login_form" onsubmit="return login_check();" action="main.html">
 					<h3 class="h3">우리끼리 Get Together!</h3>
 					<h6 class="h6">지금 바로 모이세요.</h6>
 					  <div class="mb-3">
@@ -96,8 +143,8 @@
 			    </div>
 			    <div class="col-md-8">
 			      <div class="card-body">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        <h5 class="card-title">그룹을 만들어 맛집을 공유하세요!</h5>
+			        <p class="card-text">친구, 직장 동료, 지인을 초대해 그룹을 이뤄 맛집을 공유하세요.</p>
 			      </div>
 			    </div>
 			  </div>
@@ -106,8 +153,8 @@
 			  <div class="row g-0">
 			    <div class="col-md-8">
 			      <div class="card-body">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        <h5 class="card-title">광고, 협찬으로 부터 Free</h5>
+			        <p class="card-text">각종 SNS에 등장하는 광고, 협찬으로 부터 보다 투명하고 솔직한 리뷰를 공유하세요.</p>
 			      </div>
 			    </div>
 			    <div class="col-md-4">
@@ -122,8 +169,8 @@
 			    </div>
 			    <div class="col-md-8">
 			      <div class="card-body">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        <h5 class="card-title">Get Together and Better Quality</h5>
+			        <p class="card-text">함께 모일 수록, 공유 할 수록 만족도 높고 수준 높은 맛집 리스트 완성!</p>
 			      </div>
 			    </div>
 			  </div>

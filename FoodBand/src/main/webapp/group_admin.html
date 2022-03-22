@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<meta charset="UTF-8">
+<title>양재동 수제버거 맛집 | Get Together</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+<script>
+	var flag_map = false;
+	
+	$(function(){
+		$("#footer_year").text(new Date().getFullYear());
+	});
+	
+	$(document).ready(function(){
+		
+	});
+	
+
+	
+</script>
+<style>
+	*{font-family: 'MaruBuri';}
+	html,body{height:100vh;postion:relative;}
+	h5{border-bottom:1px solid #C38F5C; width:40%; font-size:1.1em;}
+	li{font-size:0.9em;}
+	.container{padding-bottom:40px;}
+	#wrap{margin:0; padding:0;}
+	.bi-search, .btn{border: 1px solid #C38F5C; color:white; background-color:#C38F5C;}
+	thead{font-size:0.9em;}
+	td{word-break:break-all; font-size:0.8em;}
+	#wrap{width:100%;height: 100%;}
+	#navbar{}
+	#main{padding-top:20px; min-height: 100%;}
+	#group_thubnail{width:60%; margin:0 auto; 
+		border-radius:100px;
+		margin-bottom:10px;
+	}
+	.col-4, .rounded{text-align:center;}
+
+	
+	footer{}
+	
+</style>
+</head>
+<body>
+<div class="container-fluid" id="wrap">
+		<nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+			<div class="container-fluid">
+				<a id="brand_logo" class="navbar-brand" href="main.html"><img src="static/logo/horizontal_logo.png" width="130" alt=""></a>
+				<button class="navbar-toggler" id="naver_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_toggle" >
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
+					<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="mypage.html">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html">로그아웃</a></li>
+					</ul>
+				</div>
+				
+			</div>
+		</nav>
+	<main id="main">
+		<div class="row">
+			<div class="col-4">
+				<div class="rounded mx-auto d-block" onclick="location.href='group_info.html'">
+	  				<img id="group_thubnail" src="static/img/hamburger_01.jpg"  alt="커버사진">
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" >양재동 수제버거 맛집</li>
+					<li class="list-group-item">생성일 : 2021.02.02</li>
+					<li class="list-group-item">그룹장 : gildong</li>
+					<li class="list-group-item">인원	: 30명</li>
+					<li class="list-group-item">리뷰 수 : 12개 </li>
+					<li class="list-group-item" >평균 평점 : 4.5 </li>
+					<li class="list-group-item" >
+						
+								공지사항 입니다.
+					
+					</li>
+					
+					
+				</ul>
+			</div>
+			<div class="col-8">
+				<div id="groupinfo_section" class="container">
+					<h5 class="title">그룹 정보 </h5>
+					<form id="groupinfo_section_form">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" value="양재동 수제버거 맛집"/>
+							<input type="button" class="btn" value="변경"/>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" value="공지사항 입니다." placeholder="공지사항 "/>
+							<input type="button" class="btn" id="userid_check_btn" value="변경"/>
+						</div>
+					</form>
+				</div>
+				<div id="member_section" class="container">
+					<h5 id="member_section_title">멤버 관리 </h5>
+					<table id="member_section_table" class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>이름</th>
+								<th>가입일</th>
+							<th style="min-width:62px;" >비고</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td>gildong12345</td>
+								<td>2022.02.01</td>
+								<td>
+									<button class="btn btn-sm">강퇴</button>
+									<button class="btn btn-sm">양도</button>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>jisung12</td>
+								<td>2022.01.01</td>
+								<td>
+									<button class="btn btn-sm">강퇴</button>
+									<button class="btn btn-sm">양도</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				
+				<div id="post_section" class="container">
+					<h5 id="post_section_title">리뷰 관리 </h5>
+					<table id="postr_section_table" class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+							<th style="min-width:62px;" >비고</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td onclick="location.href='review.html'">양재동 치즈버거 잘하는 집</td>
+								<td>gildong12345</td>
+								<td>2022.02.01</td>
+								<td>
+									<button class="btn btn-sm">삭제</button>
+								</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td onclick="location.href='review.html'"  >치킨 버거 맛있네요...</td>
+								<td>jisung12</td>
+								<td>2022.01.01</td>
+								<td>
+									<button class="btn btn-sm">삭제</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<!-- 그룹 가입 요청 현황 -->
+				<div id="invited_section" class="container">
+					<h5 id="invited_title">그룹 가입 신청 현황</h5>
+					<table id="invited_section_table" class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th scope="col">아아디</th>
+								<th scope="col">요청 시간</th>
+								<th scope="col" style="min-width:62px;" >비고</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>jinsu</td>
+								<td>2020.01.01 12:00:00</td>
+								<td id="option_btn">
+									<button class="btn btn-sm">수락</button>
+									<button class="btn btn-sm">거절</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- 그룹 초대 신청 현황 -->
+				<div id="invited_section" class="container">
+					<h5 id="invited_title">그룹 초대 신청 현황</h5>
+					<table id="invited_section_table" class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>아이디</th>
+								<th>요청 시간</th>								
+								<th style="min-width:62px;">비고</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>ronaldo9</td>
+								<td>2022.01.01 12:00:00</td>
+								<td>
+									<button class="btn btn-sm" disabled>거절</button>
+								</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>sonny</td>
+								<td>2022.01.02 14:00:00</td>
+								<td>
+									<button class="btn btn-sm" disabled>수락</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div> <!-- col-8 end -->
+		</div> <!-- row end -->
+	</main>
+	<div id="bottombar"></div>
+	<footer class="bg-light text-center text-lg-star">
+		  
+		  <!-- Copyright -->
+		  <div class="text-center p-3" style="background-color: #C38F5C;">
+		    © 2022-<span id="footer_year"></span> Copyright:
+		    <a class="text-dark" href="#">Get Together</a>
+		  </div>
+	  	<!-- Copyright -->
+	</footer>
+</div>
+
+
+</body>
+</html>

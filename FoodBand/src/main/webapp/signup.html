@@ -6,16 +6,121 @@
 <title>회원가입 | GetTogether</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet"> <!-- 폰트 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> <!-- 부트스트랩 아이콘 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
+	*{font-family: 'MaruBuri';}
+	.btn{color: white;}
 	#brand_logo{margin:0 auto;}
-	#form_container{height:70vh;width:60%; margin:0 auto; padding-top:100px;}
+	#form_container{height:70vh;width:75%; margin:0 auto; padding-top:100px;}
 	#login_form>div:nth-child(3)>#userid_check_btn{color:white;background-color:#C38F5C;}
 	#login_form>div:nth-child(6)>#btn_signup{width:100%; border:1px solid #bcb1ae; background-color:#C38F5C;}
 	#login_form>div:nth-child(7){text-align:center;}
 	#login_form>div:nth-child(7)>a{ color:#C38F5C;}
+	#login_form input{ font-size:0.82em;}
+	
+	
+	/*반응형 스타일 적용하기*/
+	/*320px ~ 600px*/
+	/* all,screen, print, tv, projection... */
+	@media all and (min-width:320px) and (max-width:600px) {
+	}
+	/*601px~ 900px*/
+	@media all and (min-width:601px) and (max-width:999px){
+		#form_container{height:70vh;width:60%; margin:0 auto; padding-top:100px;}
+	}
+	@media all and (min-width:1000px){
+		#form_container{height:70vh;width:600px;; margin:0 auto; padding-top:100px;}
+	}
+
 </style>
+<script>
+	var is_check = false;
+	$(document).ready(function(){
+		$("#userid_check_btn").on('click',function(){
+			
+			if(id_reg(document.getElementById("userid")) == false){
+				return;
+			}
+			else{
+				alert("사용가능한 아이디 입니다");
+				//alert("이미 사용중인 아이디 입니다.");
+				is_check = true;
+			}
+		});
+		
+		$("#userid").on('keyup',function(){
+			is_check=false;
+		})
+		
+	});
+	
+	function id_reg(userid){
+		var reg = /^[a-zA-Z0-9]{4,20}$/;
+		
+		if(userid.value==""){
+			alert("아이디를 입력해 주세요.");
+			userid.focus();
+			return false;
+		}
+		if(reg.test(userid.value) == false){
+			alert("아이디를 잘못 입력하였습니다.");
+			console.log("test");
+			userid.value="";
+			userid.focus();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	function passwd_reg(passwd,passwd_chk){
+		var reg = /^[a-zA-Z0-9].[!@*]{8,20}$/;
+		if(passwd.value==""){
+			alert("비밀번호를 입력해 주세요.");
+			passwd.focus();
+			return false;
+		}
+		if(passwd.value.length<8){
+			alert("비밀번호를 8자 이상 입력해 주세요!");
+			passwd.focus();
+			return false;
+		}
+		if(reg.test(passwd.value) == false){
+			alert("비밀번호를 영문대소문자, 숫자 , !@* 만 사용가능.");
+			passwd.focus();
+			return false;
+		}
+		if(passwd_chk.value == ""){
+			alert("비밀번호를 확인해 주세요.");
+			passwd_chk.focus();
+			return false;
+		}
+		if(passwd.value != passwd_chk.value){
+			alert("비밀번호가 동일하지 않습니다.");
+			passwd.focus();
+			return false;
+		}
+		
+		
+	}
+	
+	function signup_check(){
+		var userid = document.getElementById("userid");
+		var passwd = document.getElementById("pw");
+		var passwd_chk = document.getElementById("pw_check");
+		
+		if(is_check == false){
+			alert("아이디 중복체크를 해주세요!");
+			return false;
+		}
+		if(id_reg(userid) == false) return false;
+		if(passwd_reg(passwd, passwd_chk) == false) return false;
+		return false;
+	}
+</script>
 </head>
 <body>
 <div id="wrap">
@@ -26,21 +131,21 @@
 		</nav>
 	<main id="main">
 		<div id="form_container">
-			<form class="center-block" id="login_form">
+			<form class="center-block" id="login_form" onsubmit="return signup_check();">
 				<h3 class="h3">우리끼리 Get Together!</h3>
 				<h6 class="h6">지금 바로 모이세요.</h6>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="userid" placeholder="아이디">
+					<input type="text" class="form-control" id="userid" placeholder="아이디. 영문, 슷자 4-20자리" maxlength="20">
 					<input type="button" class="btn" id="userid_check_btn" value="중복체크"/>
 				</div>
 				<div class="mb-3">
-					<input type="password" class="form-control" id="pw" placeholder="비밀번호">
+					<input type="password" class="form-control" id="pw" placeholder="비밀번호. 영문,숫자,특수문자 포함" maxlength="20">
+				</div>
+				<div class="input-group mb-3">
+					<input type="password" class="form-control" id="pw_check" placeholder="비밀번호 확인">					
 				</div>
 				<div class="mb-3">
-					<input type="password" class="form-control" id="pw_check" placeholder="비밀번호 확인">
-				</div>
-				<div class="mb-3">
-					<input type="submit" class="btn btn-primary" id="btn_signup" value="가입하기">
+					<input type="submit" class="btn" id="btn_signup" value="가입하기">
 				</div>
 				<div>이미 가입하셨나요? <a href="login.html">로그인하기</a></div>		
 			</form>
