@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.campus.myapp.dao.ClubMemberDAO">
+  	<insert id="clubMemberInsert">
+  		insert into clubmember(clubno, userid)
+  		values(${clubno}, #{userid})
+  	</insert>
+  	
+  	<select id="clubMemberSelect" resultType="com.campus.myapp.vo.ClubMemberVO">
+  		select no,clubno, userid ,joindate from clubmember
+  		where userid=#{param1}
+  	</select>
+  	<select id="clubMemberCheck" resultType="int">
+  		select no,clubno, userid ,joindate from clubmember
+  		where userid=#{param1} and clubno=${param2}
+  	</select>
+  </mapper>
