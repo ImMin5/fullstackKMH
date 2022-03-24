@@ -53,7 +53,7 @@
 		
 		//리뷰 작성 이동
 		$(document).on("click", "#write_btn", function(){
-			location.href='review_form.html';
+			location.href='${url}/main/club/{clubno}/reivew_form';
 		})
 	});
 	
@@ -71,9 +71,11 @@
 		}
 	}
 	
-	function mapReset(){
+	function mapReset(review_list){
 		latitude = 37.51501756622601;
 		longitude = 127.07315236974777;
+		
+		console.log(review_list);
 		
 		addr = ['서울 선유도','서울 뚝섬', '서울 시청', '서울 잠실종합운동장'];
 		homePage = ['https://www.nate.com','https://www.naver.com','https://www.seoul.go.kr','https://stadium.seoul.go.kr/reserve/jamsil'];
@@ -82,6 +84,7 @@
 	
 	//initMap
 	function initMap(){
+		
 		mapReset();
 		console.log("init");
 		var mapProperties = {
@@ -93,13 +96,19 @@
 		map = new google.maps.Map(document.getElementById('info_section_map'),mapProperties);
 		//GeoCoder : 지명과 건물등의 명칭을 이용하여 지도의 위도 경도를 구할 수 있다.
 		geoCoder = new google.maps.Geocoder();
-		for(var i=0; i<addr.length; i++){
-			// 지명, 홈페이지 주소, 해당 이미지
-			setMapPosition(addr[i], homePage[i],popImg[i]);
-		}
+		console.log("review count : "+ ${rvo.size()});
+
+		var loaction = new Array();
+		var link = new Array();
+		var img = new Array();
+		<c:forEach var="vo" items="${rvo}">
+			setMapPosition("${vo.location}", "${vo.link}", "hamburger_01.jpg", "${vo.subject}","${vo.no}");
+		</c:forEach>
+		
+		
 	}//initMap
 	
-	function setMapPosition(addr2,home2,pop2){
+	function setMapPosition(addr2,home2,pop2, subject,reviewno){
 		console.log("setMapPosition");
 		//마커를 표시할 주소
 		geoCoder.geocode({
@@ -120,11 +129,11 @@
 				var la = results[0]['geometry']['location']['lat'](); //위도
 				var lo = results[0]['geometry']['location']['lng'](); //경도
 				
-				var title = "<a href='review.html'>수제버거 패티가 정말 맛있는 집1</a>"
+				var title = "<a href='${url}/main/club/${clubno}/review/"+reviewno+"'>"+subject+"</a>"
 				var popMsg = "제목 : " + title;
-				popMsg += "<br/> SNS : " + "<a href='https://www.instagram.com' target='_blnak'>sns 이동하기</a>";
+				popMsg += "<br/> SNS : " + "<a href='"+home2+"' target='_blnak'>"+home2+"</a>";
 				popMsg += "<br/> 주소 :" + results[0].formatted_address;
-				popMsg += "<br/> <a href='"+home2+"' target='_blnak'><img src='static/img/hamburger_02.jpg' width='100' height='50'/></a>";
+				popMsg += "<br/> <a href='"+home2+"' target='_blnak'><img src='${url}/static/img/hamburger_02.jpg' width='100' height='50'/></a>";
 				
 				var info = new google.maps.InfoWindow({content:popMsg});
 				
@@ -200,7 +209,7 @@
 	<main id="main">
 		<div class="row">
 			<div class="col-4">
-				<div class="rounded mx-auto d-block">
+				<div class="rounded mx-auto d-block" onclick="location.href='${url}/main/club_map/${clubno}'">
 	  				<img id="group_thubnail" src="${url}/static/img/${cvo.clubthumbnail}"  alt="커버사진">
 				</div>
 				<ul class="list-group list-group-flush">

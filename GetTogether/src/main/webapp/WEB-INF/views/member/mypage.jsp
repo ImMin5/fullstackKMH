@@ -20,6 +20,7 @@
 	
 	$(function(){
 		$("#footer_year").text(new Date().getFullYear());
+		
 	});
 	
 	$(document).ready(function(){
@@ -27,6 +28,10 @@
 			console.log("탈퇴");
 			confirm("정말 그룹을 나가시겠습니까?");
 		});
+		
+		//비밀번호 입력해야 닉네임 변경가능
+		
+		$("#")
 	});
 	
 
@@ -60,8 +65,8 @@
 				</button>
 				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
 					<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="mypage.html">마이페이지</a></li>
-					<li class="nav-item"><a class="nav-link" href="index.html">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link" href="${url}/main/mypage">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="${url}/member/logout">로그아웃</a></li>
 					</ul>
 				</div>
 				
@@ -72,14 +77,21 @@
 			<h5 class="title">프로필</h5>
 			<form id="profile_section_form">
 				<div class="mb-3">
-					<input type="text" class="form-control" value="gildong1234" readonly/>
-				</div>
-				<div class="mb-3">
-					<input type="text" class="form-control" value="비밀번호"/>
+					<input type="text" class="form-control" name="userid" value="${vo.userid}" readonly/>
 				</div>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" value="비밀번호 확인"/>
-					<input type="button" class="btn" id="userid_check_btn" value="변경"/>
+					<input type="text" class="form-control" value="${vo.username}" />
+					<input type="button" class="btn" id="username_edit_btn" value="변경"/>
+				</div>
+				<div class="mb-3">
+					<input type="text" class="form-control" placeholder="비밀번호"/>
+				</div>
+				<div class="mb-3">
+					<input type="text" class="form-control" placeholder="변경할 비빌먼호" value=""/>
+				</div>
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="변경할 비밀번호 확인"/>
+					<input type="button" class="btn" id="userpassword_edit_btn" value="변경"/>
 				</div>
 			</form>
 		</div>
@@ -89,22 +101,20 @@
 				<thead>
 					<tr>
 					<th>그룸명</th>
-					<th>멤버수</th>
-					<th>리뷰수</th>
 					<th>가입 날짜</th>
 					<th style="min-width:62px;" >비고</th>
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach var="vo" items="${clist}">
 					<tr>
-						<td>시카고 피자 맛집</td>
-						<td>59명</td>
-						<td>12개</td>
-						<td>2022.01.01</td>
+						<td>${vo.clubid}</td>
+						<td>${vo.joindate}</td>
 						<td>
 							<button id="withdrawal_btn" class="btn btn-sm">탈퇴</button>
 						</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

@@ -19,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.campus.myapp.service.ClubMemberService;
 import com.campus.myapp.service.ClubService;
 import com.campus.myapp.service.MemberService;
+import com.campus.myapp.service.ReviewService;
 import com.campus.myapp.vo.ClubMemberVO;
 import com.campus.myapp.vo.ClubVO;
 import com.campus.myapp.vo.MemberVO;
+import com.campus.myapp.vo.ReviewVO;
 
 @RestController
 public class ClubController {
@@ -32,7 +34,8 @@ public class ClubController {
 	ClubMemberService serviceGM;
 	@Inject
 	MemberService serviceM;
-	
+	@Inject
+	ReviewService serviceR;
 	
 	//로그인후의 main 페이지 view
 	@GetMapping("/main")
@@ -40,27 +43,19 @@ public class ClubController {
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)session.getAttribute("logId");
 		
-		//userid가 소속된 club id를 구해봄
-		List<ClubMemberVO> clubMemberList = serviceGM.clubMemberSelect(userid);
-		System.out.println(userid + "가 소속된 클럽 수 : "+ clubMemberList.size());
-		
 		//userid가 소속된 클럽을 구하는 과정
-		List<ClubVO> clubList = new ArrayList<ClubVO>();
+		List<ClubVO> clubList = service.clubSelect(userid);
 		
-		for(ClubMemberVO vo : clubMemberList) {
-			int no = vo.getClubno();
-			System.out.println("클럽 no :" + vo.getClubno());
-			System.out.println("가입일 : " + vo.getJoindate());
-			clubList.add(service.clubSelect(no));
-			
-		}
+		//공개된 클럽의 목록을 구하는 과정
+		List<ClubVO> clubListPublic = service.clubSelectPublic(true,userid);
 		System.out.println("소속된 클럽 수 결과: "+ clubList.size());
 		mav.addObject("clublist", clubList);
+		mav.addObject("clublistPublic",clubListPublic);
 		mav.setViewName("main");
 		return mav;
 	}
 	
-	//group 생성 view
+	//클럽 생성 view
 	@GetMapping("/main/club/clubForm")
 	public ModelAndView clubForm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -73,8 +68,8 @@ public class ClubController {
 	@PostMapping("/main/club/clubFormOk")
 	public ResponseEntity<String> clubFormOk(ClubVO vo, HttpSession session, HttpServletRequest request){
 		String userid = (String)session.getAttribute("logId");
+		String username = (String)session.getAttribute("logName");
 		
-		System.out.println(vo.toString());
 		System.out.println("group admin : " + userid);
 		System.out.println("group name : " + vo.getClubid());
 		System.out.println("group description : " + vo.getDescription());
@@ -99,7 +94,10 @@ public class ClubController {
 			//그룹 맴버 생성
 			ClubMemberVO cvo = new ClubMemberVO();
 			cvo.setClubno(vo.getNo());
+			cvo.setClubid(vo.getClubid());
 			cvo.setUserid(userid);
+			cvo.setUsername(username);
+			
 			System.out.println("club member : " + cvo.getUserid());
 			System.out.println("club no :  " + cvo.getClubno());
 			serviceGM.clubMemberInsert(cvo);
@@ -122,11 +120,11 @@ public class ClubController {
 		String userid = (String)session.getAttribute("logId");
 		
 		//접속한 사람이 클럽의 회원인지 판별한다.
-		int result = serviceGM.clubMemberCheck(userid, clubno);
+		ClubVO vo = service.clubSelectMember(userid,clubno);
+		List<ReviewVO> rvo = serviceR.reviewSelect(clubno);
 		
-		if(result > 0) {
+		if(vo != null) {
 			//클럽의 정보를 웹페이지에 전달.
-			ClubVO vo = service.clubSelect(clubno);
 			System.out.println("clubdi : " + vo.getClubid());
 
 			
@@ -134,6 +132,7 @@ public class ClubController {
 			System.out.println(vo.getClubadmin());
 			MemberVO adminvo = serviceM.memberSelectOne(vo.getClubadmin());
 			mav.addObject("clubadmin", adminvo.getUsername());
+			mav.addObject("rvo", rvo);
 			
 			//클럽의 관리자 권한
 			if(vo.getClubadmin().equals(userid)) 
@@ -144,7 +143,7 @@ public class ClubController {
 			mav.setViewName("club/club");
 		}
 		else {
-			mav.setViewName("redierect:/main");
+			mav.setViewName("redirect:/main");
 		}
 		
 		
@@ -152,17 +151,17 @@ public class ClubController {
 	}
 	
 	//클럽 지도 view
-	@GetMapping("/main/club_info/{clubno}")
+	@GetMapping("/main/club_map/{clubno}")
 	public ModelAndView clubMap(@PathVariable("clubno") int clubno, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)session.getAttribute("logId");
 		
 		//접속한 사람이 클럽의 회원인지 판별한다.
-		int result = serviceGM.clubMemberCheck(userid, clubno);
+		ClubVO vo = service.clubSelectMember(userid,clubno);
+		List<ReviewVO> rvo = serviceR.reviewSelect(clubno);
 		
-		if(result > 0) {
+		if(vo != null) {
 			//클럽의 정보를 웹페이지에 전달.
-			ClubVO vo = service.clubSelect(clubno);
 			System.out.println("clubdi : " + vo.getClubid());
 
 			
@@ -170,7 +169,7 @@ public class ClubController {
 			System.out.println(vo.getClubadmin());
 			MemberVO adminvo = serviceM.memberSelectOne(vo.getClubadmin());
 			mav.addObject("clubadmin", adminvo.getUsername());
-			
+			mav.addObject("rvo", rvo);
 			//클럽의 관리자 권한
 			if(vo.getClubadmin().equals(userid)) 
 				mav.addObject("adminStatus","Y");
@@ -180,7 +179,7 @@ public class ClubController {
 			mav.setViewName("club/club_map");
 		}
 		else {
-			mav.setViewName("redierect:/main");
+			mav.setViewName("redirect:/main");
 		}
 		
 		
@@ -194,7 +193,7 @@ public class ClubController {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		ClubVO vo = service.clubSelect(clubno);
+		ClubVO vo = service.clubSelectOne(clubno);
 		
 		if(userid.equals(vo.getClubadmin())){
 			mav.setViewName("club/club_admin");

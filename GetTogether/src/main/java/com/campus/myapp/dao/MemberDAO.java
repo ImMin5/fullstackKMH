@@ -7,5 +7,5 @@ public interface MemberDAO {
 	public MemberVO loginCheck(MemberVO vo);
 	public int idCheck(String username);
 	public int usernameCheck(String username);
-	public MemberVO memberSelectOne(String username); //멤버 1명 선택
+	public MemberVO memberSelectOne(String userid); //멤버 1명 선택
 }

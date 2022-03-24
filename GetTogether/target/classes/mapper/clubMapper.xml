@@ -4,14 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.campus.myapp.dao.ClubDAO">
   	<insert id="clubInsert">
-  		insert into club(clubid, clubadmin, ispublic,clubthumbnail
-  		<if test="{description != null}">, description</if>
-  		)
-  		values(#{clubid}, #{clubadmin},${ispublic}, #{clubthumbnail}
-  		<if test="{description != null}">,#{description}</if>
-  		)
+  		insert into club(clubid, clubadmin, ispublic,clubthumbnail,description)
+  		values(#{clubid}, #{clubadmin},${ispublic}, #{clubthumbnail}, #{description})
   	</insert>
   	<select id="clubSelect" resultType="com.campus.myapp.vo.ClubVO">
+  		select no, clubid, clubadmin, clubpost, clubmember, clubnotice, date_format(createdate,'%Y.%m.%d') createdate, 
+  			 clubthumbnail,description,ispublic
+  		from club
+  		where no in (select clubno from clubmember where userid=#{param1})
+  	</select>
+  	<select id="clubSelectOne" resultType="com.campus.myapp.vo.ClubVO">
   		select no, clubid, clubadmin, clubpost, clubmember, clubnotice, date_format(createdate,'%Y.%m.%d') createdate, 
   			 clubthumbnail,description,ispublic
   		from club
@@ -21,4 +23,19 @@
   		select no ,clubid, clubadmin from club
   		where clubadmin =#{param1} and clubid=#{param2}
   	</select>
+  	<select id="clubSelectPublic" resultType="com.campus.myapp.vo.ClubVO">
+  		select no, clubid, clubadmin, clubpost, clubmember, date_format(createdate,'%Y.%m.%d') createdate
+  		,description, ispublic
+  		from club
+  		where ispublic=${param1} || clubid in (select clubid from clubmember where userid=#{param2})
+  	</select>
+  	<select id="clubSelectMember" resultType="com.campus.myapp.vo.ClubVO">
+  		select no, clubid, clubadmin, clubpost, clubmember, clubnotice, date_format(createdate,'%Y.%m.%d') createdate, 
+  			 clubthumbnail,description,ispublic
+  		from club
+  		where no=(select clubno from clubmember where userid=#{param1} and clubno=${param2})
+  	</select>
+  	<update id="clubUpdatePost">
+  		update club set clubpost = clubpost+1 where no=#{param1}
+  	</update>
   </mapper>

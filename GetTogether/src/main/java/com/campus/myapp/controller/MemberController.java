@@ -1,5 +1,7 @@
 package com.campus.myapp.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,13 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.tags.Param;
 
+import com.campus.myapp.service.ClubMemberService;
+import com.campus.myapp.service.ClubService;
 import com.campus.myapp.service.MemberService;
+import com.campus.myapp.vo.ClubMemberVO;
+import com.campus.myapp.vo.ClubVO;
 import com.campus.myapp.vo.MemberVO;
 
 @RestController
 public class MemberController {
 	@Inject
 	MemberService service;
+	@Inject
+	ClubMemberService serviceMebmerClub;
 	
 	//회원가입 view
 	@GetMapping("/signup")
@@ -114,7 +122,14 @@ public class MemberController {
 	//마이페이지
 	@GetMapping("/main/mypage")
 	public ModelAndView mypage(HttpSession session) {
+		String userid = (String)session.getAttribute("logId");
 		ModelAndView mav = new ModelAndView();
+		MemberVO vo = service.memberSelectOne(userid);
+		
+		List<ClubMemberVO> clubList = serviceMebmerClub.clubMemberSelect(userid);
+		
+		mav.addObject("clist",clubList);
+		mav.addObject("vo", vo);
 		mav.setViewName("member/mypage");
 		return mav;
 	}

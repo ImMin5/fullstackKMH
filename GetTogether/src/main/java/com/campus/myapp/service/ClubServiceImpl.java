@@ -1,5 +1,7 @@
 package com.campus.myapp.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -16,12 +18,28 @@ public class ClubServiceImpl implements ClubService {
 		return dao.clubInsert(vo);
 	}
 	@Override
-	public ClubVO clubSelect(int no) {
-		return dao.clubSelect(no);
+	public List<ClubVO> clubSelect(String userid) {
+		return dao.clubSelect(userid);
 	}
 	@Override
 	public ClubVO clubSelectAdmin(String admin, String clubid) {
 		return dao.clubSelectAdmin(admin, clubid);
+	}
+	@Override
+	public List<ClubVO> clubSelectPublic(boolean ispublic, String userid){
+		return dao.clubSelectPublic(ispublic, userid);
+	}
+	@Override
+	public ClubVO clubSelectOne(int no) {
+		return dao.clubSelectOne(no);
+	}
+	@Override
+	public ClubVO clubSelectMember(String userid, int no) {
+		return dao.clubSelectMember(userid, no);
+	}
+	@Override
+	public int clubUpdatePost(int clubno) {
+		return dao.clubUpdatePost(clubno);
 	}
 	
 
