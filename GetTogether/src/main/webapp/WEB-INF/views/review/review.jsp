@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="${url}/static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>양재동 수제버거 맛집 | Get Together</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,43 +13,50 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 <style>
 	*{font-family: 'MaruBuri';}
 	html,body{height:100vh;postion:relative;}
-	li{font-size:0.9em;}
+	li{font-size:0.9em;   list-style:none;}
+	a{text-decoration:none; color:black;}
+	a:hover{color:#C38F5C;}
+	.col{margin:0;, padding:0;}
 	#wrap{margin:0; padding:0;}
 	.bi-search, .btn{border: 1px solid #C38F5C; color:white; background-color:#C38F5C;}
 	td{word-break:break-all; font-size:0.8em;}
 	#wrap{width:100%;height: 100%;}
 	#navbar{}
 	#main{padding-top:20px; min-height: 100%;}
-	#search_section{width:70%;}
-	#list_btn_container{text-align:center;}
-	#list_btn_container>#list_btn_group>button:nth-child(1){
-		border-top-left-radius:10px;
-		border-bottom-left-radius:10px;
-		border-right: 2px solid #ddd;
-		font-size:0.8em;
-	}
-	#list_btn_container>#list_btn_group>button:nth-child(2){
-		border-top-right-radius:10px;
-		border-bottom-right-radius:10px;
-		border-left: 2px solid #ddd;
-		font-size:0.8em;
+	#main article{height:100%;}
+	#main article>#btn_section{margin-top:10px;}
+	#main article>#btn_section button{float:right; font-size:0.6em;}
+
 	
-	}
-	#joined_group{height:40%; margin:0 auto;}
-	#info_section{padding:2%;}
-	#info_section>table{ margin:0 auto; overflow-y: hidden}
-	#info_section>nav{padding-top:10px;}
-	#info_section> nav a {color:#C38F5C;}
+	#main article>#review_header_section #review_title{font-size:1.2em;}
+	#main article>#review_header_section #review_info {font-size:0.6em; text-align:right;}
 	#group_thubnail{width:60%; margin:0 auto; 
 		border-radius:100px;
 		margin-bottom:10px;
 	}
 	.col-4, .rounded{text-align:center;}	
+	#btn_next_review{margin-left:2px;}
+	#reivew_section_score{float:right;}
+
 	footer{}
-	
+		/*  별표 점수 주기*/
+	.star-rating { 
+		display:flex;
+	  	flex-direction: row-reverse;
+	  	font-size:1.5em;
+	  	justify-content:space-around;
+	  	padding:0 .2em;
+	  	text-align:center;
+	  	width:5em;
+	}
+	.star-rating input {display:none;}
+	.star-rating label {color:#ccc;cursor:pointer;}
+	.star-rating :checked ~ label {color:#C38F5C;}
+	.star-rating label:hover,.star-rating label:hover ~ label {color:#C38F5C;}
 </style>
 <script>
 	var flag_map = false;
@@ -60,7 +67,7 @@
 	
 	$(document).ready(function(){
 		$(document).on('click',"#list_btn",function(){
-			location.href="${url}/main/club/${cvo.no}";
+			location.href="group_info.html";
 			if(flag_map == false) return;
 			$("#info_section_map").remove();
 			$("#info_section").append("<div id='info_section_table'>테이블</div>");
@@ -69,7 +76,7 @@
 		
 		
 		$(document).on('click',"#list_map_btn",function(){
-			location.href="${url}/main/club_map/${cvo.no}";
+			location.href="group_info_map.html";
 			if(flag_map == true) return;
 			$("#info_section_table").remove();
 			$("#info_section").append("<div id='info_section_map'>지도</div>");
@@ -78,34 +85,28 @@
 		
 		// 리뷰 작성 이동
 		$(document).on("click", "#write_btn", function(){
-			location.href='${url}/main/club/${cvo.no}/review_form';
+			location.href='review_form.html';
 		})
-		<!-- 검색 기능-->
-		$("#search_input").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("tbody tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
-		});
+		
+	
 	});
+	
+
+	
 </script>
 </head>
 <body>
 <div class="container-fluid" id="wrap">
 		<nav id="navbar" class="navbar navbar-expand-lg navbar-light">
 			<div class="container-fluid">
-				<a id="brand_logo" class="navbar-brand" href="${url}"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
+				<a id="brand_logo" class="navbar-brand" href="main.html"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
 				<button class="navbar-toggler" id="naver_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_toggle" >
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
 					<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="${url}/main/myapge">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="${url}/main/mypage">마이페이지</a></li>
 					<li class="nav-item"><a class="nav-link" href="${url}/member/logout">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link"  data-bs-toggle="modal" data-bs-target="#modal_invite" >멤버 초대</a></li>
-					<c:if test="${adminStatus == 'Y'}">
-						<li class="nav-item"><a class="nav-link" href="${url}/main/club/${cvo.no}/admin">그룹관리</a></li>
-					</c:if>
 					</ul>
 				</div>
 				
@@ -132,72 +133,80 @@
 								</c:if>
 					
 					</li>
-					
-					
 				</ul>
 			</div>
 			<div class="col-8">
-				<div id="search_section" class="container">
-					<div class="input-group mb-3">
-					    <input type="search" id="search_input" class="form-control" placeholder="검색하기"/>
-					    <button type="button" class="btn"><i class="bi bi-search"></i></button>
+				<article class="container">
+					<div id="btn_section">
+						<div class="row">
+							<div class="col-7"></div>
+							<div class="col-5">
+								<button id="btn_next_review" class="btn">이전글</button>
+						  		<button class="btn">다음글</button>
+						 	</div>
+						 </div>
 					</div>
-				</div>
-				<div id="list_btn_container" class="container">
-					<div id="list_btn_group" class="btn-group" role="group" >
-					  <button id="list_btn" type="button" class="btn">목록으로 보기</button>
-					  <button id="list_map_btn" type="button" class="btn ">지도로 보기</button>
-					</div>		
-				</div>
-	
-	
-				<div id="info_section" class="table-responsive">
-					<table id="info_section_table" class="table">
-					  <thead>
-					    <tr>
-					      <th scope="col" style="min-width:12px;">#</th>
-					      <th scope="col" style="min-width:173px;">제목</th>
-					      <th scope="col" style="min-width:122px;">위치</th>
-					      <th scope="col" style="min-width:50px;">평점</th>
-					      <th scope="col" style="min-width:78px;">방문일</th>
-					      <th scope="col" style="min-width:80px;">작성자</th>
-					      <th scope="col" style="min-width:78px;">작성일</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					  <c:forEach var="vo" items="${rvo}">
-					    <tr >
-					      <th scope="row" onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >1</th>
-					      <td  onclick="location.href='review.html'" >${vo.subject}</td>
-					      <td  onclick="location.href='review.html'" >${vo.location}</td>
-					      <td  onclick="location.href='review.html'">${vo.score}</td>
-					      <td  onclick="location.href='review.html'">${vo.visitdate}</td>
-					      <td  onclick="location.href='review.html'">${vo.username}</td>
-					      <td  onclick="location.href='review.html'">${vo.writedate}</td>
-					    </tr>
-					  </c:forEach>
-					  </tbody>
-					</table>
-					<input id="write_btn" style="margin-top:10px; float:right;" type="button" class="btn btn-sm" value="리뷰 작성"/>
-					<nav>
-					  <ul class="pagination justify-content-center">
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav>
-				</div>
-			</div>
+					<div id="review_header_section" class="containe-fluid">
+						<a href="${url}/main/club/${clubno}" style="font-size:0.7em;">목록으로 돌아가기</a>
+						<div class="row">
+							<div id="review_title" class="col-12">${rvo.subject}</div>
+						</div>
+						<div id="review_info" class="row">
+							<div class="col-6"></div>
+							<div class="col-6">${rvo.username} &nbsp&nbsp&nbsp ${rvo.writedate}<!-- Split dropend button -->
+								<div class="btn-group dropend">
+								  <i  class=" dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+								    <span class="visually-hidden">Toggle Dropright</span>
+								  </i>
+								  <ul class="dropdown-menu">
+								    <li class="dropdown-item">수정하기</li>
+								    <li class="dropdown-item">삭제하기</li>
+								  </ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr/>
+					<div id="review_section">
+						<div> <!-- 사용자 입력 데이터  -->
+							<ul class="list-group list-group-flush">
+								<li >방문 인원 : ${rvo.people }</li>
+								<li>재방문 의사 :
+									<c:if test="${rvo.revisit}"> 있음</c:if>
+									<c:if test="${rvo.revisit == false}"> 없음</c:if>
+								</li>
+								<li>방문날짜 : ${rvo.visitdate }</li>
+								<li>SNS링크 : <a href="${rvo.link}">이동하기</a></li>
+								<li><i class="bi bi-pin-map"></i><a href="#">${rvo.location}</a></li>
+								<li id="reivew_section_score"> 
+									<div class="row" style="float:left;">
+										<div class="col">
+											<div class="star-rating"> 
+											  <input type="radio" id="5-stars" class="form-control" name="rating" value="5" />
+											  <label for="5-stars" class="star">&#9733;</label>
+											  <input type="radio" id="4-stars" name="rating" value="4" checked/>
+											  <label for="4-stars" class="star">&#9733;</label>
+											  <input type="radio" id="3-stars" name="rating" value="3" />
+											  <label for="3-stars" class="star">&#9733;</label>
+											  <input type="radio" id="2-stars" name="rating" value="2" />
+											  <label for="2-stars" class="star">&#9733;</label>
+											  <input type="radio" id="1-star" name="rating" value="1" />
+											  <label for="1-star" class="star">&#9733;</label>
+											</div>										
+										</div>
+
+									</div>
+								</li>
+							</ul>
+
+						</div>
+						<!-- 리뷰 내용 예시 -->
+						<pre id="content" >
+						 	${rvo.content }
+						</pre>
+					</div>
+				</article>
+			</div><!-- col-8 -->
 		</div>
 	</main>
 	<div id="bottombar"></div>

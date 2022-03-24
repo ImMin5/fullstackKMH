@@ -80,11 +80,7 @@
 		
 		//닉네임 중복검사
 		$("#username_check_btn").on('click',function(){
-			if(id_reg(document.getElementById("username")) == false){
-				return;
-			}
-			
-			else{
+
 				var url = "${url}/member/usernameCheck";
 				var username = $("#username").val();
 				
@@ -108,7 +104,7 @@
 						is_check = false;
 					}
 				});
-			}
+			
 		});
 		
 		$("#userid").on('keyup',function(){is_check=false;})

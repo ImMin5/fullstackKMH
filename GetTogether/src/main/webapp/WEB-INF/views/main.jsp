@@ -44,16 +44,13 @@
 	#main>#group_table>table{ margin:0 auto; width:95%; overflow:auto;}
 	#main>#group_table thead{font-size:0.8em;}
 	#main>#group_table tbody{font-size:0.8em;}
-	#joined_group{height:40%;margin:0 auto; 
-		overflow:hidden;
-		position:relative;
+	#joined_group{height:40%; 
+
 	}
 	#joined_group>#joined_group_box{ 
-		width:auto; 
-		overflow:scroll;
-		position:relative;
+	
 	}
-	#joined_group>div{float:left;}
+	#joined_group>#joined_gruop_box>div{float:left;}
 	#main>#group_table>nav{padding-top:10px;}
 	#main>#group_table>nav a {color:#C38F5C;}
 	footer{}
@@ -102,47 +99,50 @@
 			</div>
 		</div>
 		<div id="joined_group">
-			<div id="joined_gruop_box" >
-				<div class="card mb-3" onclick="location.href='group_info.html'">
-					<img src="static/img/rice_01.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-					    <h5 class="card-title">멀티 캠퍼스 8반 점심</h5>
-					    <p class="card-text">찐 점심시간 밥집</p>
-					    <p class="card-text"><small class="text-muted">인원:10 리뷰:50</small></p>
-					 </div>
-				</div>
-				<div class="card mb-3" onclick="location.href='group_info.html'">
-					<img src="static/img/rice_01.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-					    <h5 class="card-title">멀티 캠퍼스 8반 점심</h5>
-					    <p class="card-text">찐 점심시간 밥집</p>
-					    <p class="card-text"><small class="text-muted">인원:10 리뷰:50</small></p>
-					 </div>
-				</div>
-				<div class="card mb-3" onclick="location.href='group_info.html'">
-					<img src="static/img/rice_01.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-					    <h5 class="card-title">멀티 캠퍼스 8반 점심</h5>
-					    <p class="card-text">찐 점심시간 밥집</p>
-					    <p class="card-text"><small class="text-muted">인원:10 리뷰:50</small></p>
-					 </div>
-				</div>
-				<div class="card mb-3" onclick="location.href='group_info.html'">
-					<img src="static/img/rice_01.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-					    <h5 class="card-title">멀티 캠퍼스 8반 점심</h5>
-					    <p class="card-text">찐 점심시간 밥집</p>
-					    <p class="card-text"><small class="text-muted">인원:10 리뷰:50</small></p>
-					 </div>
-				</div>
-				<div class="card mb-3" onclick="location.href='group_info.html'">
-					<img src="static/img/rice_01.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-					    <h5 class="card-title">멀티 캠퍼스 8반 점심</h5>
-					    <p class="card-text">찐 점심시간 밥집</p>
-					    <p class="card-text"><small class="text-muted">인원:10 리뷰:50</small></p>
-					 </div>
-				</div>
+			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+			
+			  <div class="carousel-inner">
+			  <c:forEach   begin="0" items="${clublist}"  step="3" varStatus="status">
+			  	<div class="carousel-item active">  
+				<li>${status.index}</li>
+			  	<li>${status.index+1}</li>
+			  	<li>${status.index+2}</li>
+					<div class="card mb-3" onclick="location.href='${url}/main/club/${clublist.get(staus.index).no}'">
+					  <img src="${url}/static/img/${clublist[staus.index].clubthumbnail}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title">${status.index}</h5>
+					    <p class="card-text">${status.index}</p>
+					    <p class="card-text"><small class="text-muted">인원:${clublist.get(staus.index).clubmember} 리뷰:${clublist.get(staus.index).clubpost}	</small></p>
+					  </div>
+					</div>
+					<div class="card mb-3" onclick="location.href='${url}/main/club/${clublist.get(staus.index+1).no}'">
+					  <img src="${url}/static/img/${clublist[status.index+1].clubthumbnail}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title">${status.index+1}</h5>
+					    <p class="card-text">${clublist.get(staus.index+1).description}</p>
+					    <p class="card-text"><small class="text-muted">인원:${clublist.get(staus.index+1).clubmember} 리뷰:${clublist.get(staus.index+1).clubpost}	</small></p>
+					  </div>
+					</div>
+					<div class="card mb-3" onclick="location.href='${url}/main/club/${clublist.get(staus.index+2).no}'">
+					   <img src="${url}/static/img/${clublist.get(staus.index+2).clubthumbnail}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h5 class="card-title">${status.index+2}</h5>
+					    <p class="card-text">${clublist.get(staus.index+2).description}</p>
+					    <p class="card-text"><small class="text-muted">인원:${clublist.get(staus.index+2).clubmember} 리뷰:${clublist.get(staus.index+2).clubpost}	</small></p>
+					  </div>
+					</div>
+			    </div>
+			  
+			  </c:forEach>
+			  </div><!-- inner end -->
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span style="color:black;"class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
 			</div>
 		</div>
 		<div id="group_table" class="table">
@@ -158,7 +158,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="vo" items="${clublist}">
+			  <c:forEach var="vo" items="${clublistPublic}">
 			   <tr onclick="location.href='${url}/main/club/${vo.no}'">
 			  	 <th scope="row">${vo.no}</th>
 			      <td>${vo.clubid}</td>
