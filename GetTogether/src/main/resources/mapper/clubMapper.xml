@@ -38,6 +38,9 @@
   	<update id="clubUpdatePost">
   		update club set clubpost = (select count(no) from review where clubno = #{param1})
   	</update>
+  	<update id="clubUpdateMember">
+  		update club set clubmember = (select count(no) from clubmember where clubno = #{param1})
+  	</update>
   	<insert id="clubInsertInvite" parameterType="com.campus.myapp.vo.ClubInviteVO">
   		insert into clubinvite(userid, username, clubno, clubid, invite, submit, complete)
   		values(#{userid}, #{username}, ${clubno}, #{clubid}, ${invite}, ${submit}, ${complete})
@@ -52,4 +55,9 @@
   		from clubinvite
   		where clubno=#{param1} and invite=${param2} and complete=false
   	</select>
+  	<update id="clubInviteUpdateComplete">
+  		update clubinvite 
+  		set complete = true
+  		where no=${param1}
+  	</update>
   </mapper>

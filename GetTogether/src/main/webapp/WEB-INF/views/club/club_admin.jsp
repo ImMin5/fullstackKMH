@@ -14,21 +14,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-
-<script>
-	var flag_map = false;
-	
-	$(function(){
-		$("#footer_year").text(new Date().getFullYear());
-	});
-	
-	$(document).ready(function(){
-		
-	});
-	
-
-	
-</script>
 <style>
 	*{font-family: 'MaruBuri';}
 	html,body{height:100vh;postion:relative;}
@@ -52,6 +37,95 @@
 	footer{}
 	
 </style>
+<script>
+	var flag_map = false;
+	
+	$(function(){
+		$("#footer_year").text(new Date().getFullYear());
+	});
+	
+	$(document).ready(function(){
+		
+		//리뷰삭제
+		$(document).on("click", "button[name=review_delete_btn]",function(){
+			var url = "${url}/main/review/deleteOk";
+			var no = $(this).attr("data-no");
+			var clubno = ${cvo.no};
+			$.ajax({
+				url : url,
+				type :"POST",
+				dataType : "JSON",
+				data: {
+					no : no,
+					clubno : clubno,
+				},
+				success: function(data){
+					console.log(data.msg);
+					console.log(data.status);
+					console.log(data);
+					window.location.reload();
+				}
+				,error: function(e){
+					alert("게시물 삭제 실패");
+					
+				}
+			});
+		});
+		
+		//멤버 수락
+		$(document).on("click", "button[name=clubmember_accept_btn]",function(){
+			var url = "${url}/main/club/accept";
+			var userid =$(this).attr("data-userid");
+			var clubid ="${cvo.clubid}";
+			var clubno =${cvo.no};
+			var ivno = $(this).attr("data-no");
+			
+			$.ajax({
+				url:url,
+				type : "POST",
+				dataType : "JSON",
+				data : {
+					userid:userid,
+					clubid:clubid,
+					clubno:clubno,
+					ivno: ivno,
+				},
+				success: function(data){
+					alert(data.msg);
+					window.location.reload();
+				},
+				error: function(e){
+					alert(e.msg);
+				}
+			});
+		});
+		
+		//멤버 거절
+		$(document).on("click", "button[name=clubmember_rejcet_btn]",function(){
+			var url = "${url}/main/club/rejcet";
+			var ivno = $(this).attr("data-no");
+			
+			$.ajax({
+				url:url,
+				type : "POST",
+				dataType : "JSON",
+				data : {
+					ivno: ivno,
+				},
+				success: function(data){
+					alert(data.msg);
+					window.location.reload();
+				},
+				error: function(e){
+					alert(e.msg);
+				}
+			});
+		});
+	});
+	
+
+	
+</script>
 </head>
 <body>
 <div class="container-fluid" id="wrap">
@@ -158,7 +232,7 @@
 								<td>${vo.username}</td>
 								<td>${vo.writedate}</td>
 								<td>
-									<button class="btn btn-sm">삭제</button>
+									<button class="btn btn-sm" data-no="${vo.no}" name="review_delete_btn">삭제</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -187,8 +261,8 @@
 								<td>${vo.username }</td>
 								<td>${vo.createdate }</td>
 								<td id="option_btn">
-									<button class="btn btn-sm">수락</button>
-									<button class="btn btn-sm">거절</button>
+									<button name="clubmember_accept_btn" class="btn btn-sm" data-no="${vo.no}" data-userid="${vo.userid}">수락</button>
+									<button name="clubmember_rejcet_btn" class="btn btn-sm" data-no="${vo.no}">거절</button>
 								</td>
 							</tr>						
 						</c:forEach>

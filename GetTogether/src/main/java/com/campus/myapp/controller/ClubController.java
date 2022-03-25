@@ -232,26 +232,29 @@ public class ClubController {
 			System.out.println("클럽에 가입 : " + count);
 			
 			
-			if(count == 0 && invo != null) {
-				//가입 신청 한사람
-				result.put("msg", "이미 가입 신청한 클럽입니다. 잠시만 기다려 주세요!");
-				result.put("status", "200");
+			//해당 클럽에 가입하지 않은 멤버일때 
+			if(count == 0) {
+				//가입신청 처음인 사람 + 거절당하거나 클럽에 한번 가입한적 있는 사람
+				if(invo == null || invo.getComplete() > 0 ) {
+					ClubVO cvo = service.clubSelectOne(clubno);
+					invo = new ClubInviteVO();	
+					invo.setUserid(userid);
+					invo.setUsername(username);
+					invo.setClubno(cvo.getNo());
+					invo.setClubid(cvo.getClubid());
+					service.clubInsertInvite(invo);
+					
+					result.put("msg", "가입 신청 완료!");
+					result.put("status","200");
+				}
+				else if(invo.getComplete() == 0) {
+					result.put("msg", "이미 가입 신청한 클럽입니다. 잠시만 기다려 주세요!");
+					result.put("status", "200");
+				}
+			
 				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
 			}
-			//해당 클럽에 가입하지 않은 멤버일때 
-			else if(count == 0 && invo == null) {
-				ClubVO cvo = service.clubSelectOne(clubno);
-				invo = new ClubInviteVO();	
-				invo.setUserid(userid);
-				invo.setUsername(username);
-				invo.setClubno(cvo.getNo());
-				invo.setClubid(cvo.getClubid());
-				service.clubInsertInvite(invo);
-				
-				result.put("msg", "가입 신청 완료!");
-				result.put("status","200");
-				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
-			}else {
+			else {
 				result.put("msg", "이미 가입한 클럽입니다.");
 				result.put("status","200");
 				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
@@ -285,29 +288,31 @@ public class ClubController {
 				result.put("status", "200");
 				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
 			}
-			else if(count == 0 && invo != null) {
-				//가입 신청 한사람
-				
-				result.put("msg", "이미 가입 신청한 사람입니다.");
-				result.put("status", "200");				
-				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
+			else if(count == 0) {
+				//해당 클럽에 가입하지 않은 멤버일때 
+				if(invo == null || invo.getComplete()>0) {
+					ClubVO cvo = service.clubSelectOne(clubno);
+					invo = new ClubInviteVO();	
+					invo.setUserid(userid);
+					invo.setUsername(username);
+					invo.setClubno(cvo.getNo());
+					invo.setClubid(cvo.getClubid());
+					invo.setInvite(true);
+					invo.setSubmit(false);
+					service.clubInsertInvite(invo);
+					
+					result.put("msg", "멤버 초대 완료!");
+					result.put("status","200");
+					entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
+				}
+				else {
+					//가입 신청 한사람
+					result.put("msg", "이미 가입 신청한 사람입니다.");
+					result.put("status", "200");				
+					entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
+				}
 			}
-			//해당 클럽에 가입하지 않은 멤버일때 
-			else if(count == 0 && invo == null) {
-				ClubVO cvo = service.clubSelectOne(clubno);
-				invo = new ClubInviteVO();	
-				invo.setUserid(userid);
-				invo.setUsername(username);
-				invo.setClubno(cvo.getNo());
-				invo.setClubid(cvo.getClubid());
-				invo.setInvite(true);
-				invo.setSubmit(false);
-				service.clubInsertInvite(invo);
-				
-				result.put("msg", "멤버 초대 완료!");
-				result.put("status","200");
-				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
-			}else {
+			else {
 				result.put("msg", "이미 클럽 멤버입니다.");
 				result.put("status","200");
 				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
@@ -322,6 +327,61 @@ public class ClubController {
 		return entity;
 		
 	}
+	
+	
+	//클럽 멤버 가입 ok
+	@PostMapping("/main/club/accept")
+	public ResponseEntity<HashMap<String, String>> clubMemberAccept(String userid, String clubid, int clubno ,int ivno){
+		ResponseEntity<HashMap<String, String>> entity = null;
+		HashMap<String,String> result = new HashMap<String,String>();
+		
+		try {
+			MemberVO mvo = serviceM.memberSelectOne(userid);
+			ClubMemberVO cmvo = new ClubMemberVO();
+			cmvo.setClubid(clubid);
+			cmvo.setClubno(clubno);
+			cmvo.setUserid(mvo.getUserid());
+			cmvo.setUsername(mvo.getUsername());
+			serviceCM.clubMemberInsert(cmvo);
+			service.clubUpdateMember(clubno);
+			service.clubInviteUpdateComplete(ivno);
+			
+			result.put("msg", "멤버 가입 완료!");
+			result.put("status","200");
+			entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			result.put("msg", "멤버 가입 실패! 나중에 다시 시도해 주세요");
+			result.put("status","400");
+			entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	//클럽 멤버 가입 reject
+	@PostMapping("/main/club/rect")
+	public ResponseEntity<HashMap<String, String>> clubMemberReject(int ivno){
+		ResponseEntity<HashMap<String, String>> entity = null;
+		HashMap<String,String> result = new HashMap<String,String>();
+		try {
+				service.clubInviteUpdateComplete(ivno);	
+				result.put("msg", "가입요청 거절 완료!");
+				result.put("status","200");
+				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.OK);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				result.put("msg", "요청 실패! 나중에 다시 시도해 주세요");
+				result.put("status","400");
+				entity = new ResponseEntity<HashMap<String, String>>(result,HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+	}
+			
+	
 
 		
 	//글 수정 메세지

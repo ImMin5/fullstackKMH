@@ -13,8 +13,11 @@ public interface ClubService {
 	public ClubVO clubSelectAdmin(String admin, String clubid);
 	public ClubVO clubSelectMember(String userid, int no);
 	public int clubUpdatePost(int clubno);
+	public int clubUpdateMember(int clubno);
 	public int clubInsertInvite(ClubInviteVO vo);
+	
 	public ClubInviteVO clubInviteSelect(String userid, int clubno);
 	public List<ClubInviteVO> clubInviteSelectIsInvite(int clubno, boolean invite);
+	public int clubInviteUpdateComplete(int no);
 	
 }

@@ -54,6 +54,15 @@ public class ClubServiceImpl implements ClubService {
 	public List<ClubInviteVO> clubInviteSelectIsInvite(int clubno, boolean invite) {
 		return dao.clubInviteSelectIsInvite(clubno, invite);
 	}
+	@Override
+	public int clubUpdateMember(int clubno) {
+		return dao.clubUpdateMember(clubno);
+	}
+	@Override
+	public int clubInviteUpdateComplete(int no) {
+		return dao.clubInviteUpdateComplete(no);
+	}
+	
 	
 
 }

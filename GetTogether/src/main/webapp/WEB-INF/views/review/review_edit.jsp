@@ -154,6 +154,33 @@
 			$("#revisit").prop(${rvo.revisit});
 		});
 		
+		//리뷰삭제
+		
+		$(document).on("click", "#review_delete_btn",function(){
+			var url = "${url}/main/review/deleteOk";
+			var no = ${rvo.no}
+			var clubno = ${cvo.no};
+			$.ajax({
+				url : url,
+				type :"POST",
+				dataType : "JSON",
+				data: {
+					no : no,
+					clubno : clubno,
+				},
+				success: function(data){
+					console.log(data.msg);
+					console.log(data.status);
+					console.log(data);
+					window.location.href=data.redirect;
+				}
+				,error: function(e){
+					console.log("실패");
+					console.log(e);
+					window.location.href=e.redirect;
+				}
+			});
+		});
 	});
 	  
 
@@ -248,7 +275,9 @@
 						<div class="mb-3">
 							<input class="btn" type="submit" id="edit_btn" value="수정"/>
 							<input class="btn" type="submit" id="cancel_btn" value="취소"/>
+							<input style="float:right;" class="btn" type="submit" id="review_delete_btn" value="삭제"/>
 						</div>
+						
 					</form>
 				</div>
 			</div>

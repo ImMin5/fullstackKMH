@@ -95,8 +95,7 @@
 		$("#"+score+"-stars").prop("checked",true);
 		
 		
-		//리뷰삭제
-		
+		//리뷰삭제	
 		$(document).on("click", "#review_delete_btn",function(){
 			var url = "${url}/main/review/deleteOk";
 			var no = ${rvo.no}
