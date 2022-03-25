@@ -7,5 +7,7 @@ import com.campus.myapp.vo.ReviewVO;
 public interface ReviewDAO {
 	public int reviewInsert(ReviewVO vo);
 	public List<ReviewVO> reviewSelect(int clubno);
-	public ReviewVO reviewSelectOne(int no);
+	public ReviewVO reviewSelectOne(int no,int clubno);
+	public int reviewDelete(int no);
+	public int reviewUpdate(ReviewVO vo);
 }

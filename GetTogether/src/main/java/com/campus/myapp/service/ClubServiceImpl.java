@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.campus.myapp.dao.ClubDAO;
+import com.campus.myapp.vo.ClubInviteVO;
 import com.campus.myapp.vo.ClubVO;
 
 @Service
@@ -41,6 +42,27 @@ public class ClubServiceImpl implements ClubService {
 	public int clubUpdatePost(int clubno) {
 		return dao.clubUpdatePost(clubno);
 	}
+	@Override
+	public int clubInsertInvite(ClubInviteVO vo) {
+		return dao.clubInsertInvite(vo);
+	}
+	@Override
+	public ClubInviteVO clubInviteSelect(String userid, int clubno) {
+		return dao.clubInviteSelect(userid, clubno);
+	}
+	@Override
+	public List<ClubInviteVO> clubInviteSelectIsInvite(int clubno, boolean invite) {
+		return dao.clubInviteSelectIsInvite(clubno, invite);
+	}
+	@Override
+	public int clubUpdateMember(int clubno) {
+		return dao.clubUpdateMember(clubno);
+	}
+	@Override
+	public int clubInviteUpdateComplete(int no) {
+		return dao.clubInviteUpdateComplete(no);
+	}
+	
 	
 
 }

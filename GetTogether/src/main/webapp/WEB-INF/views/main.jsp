@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="${url}/static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>Get Together</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,28 +13,14 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script>
-	$(function(){
-		$("#footer_year").text(new Date().getFullYear());
-	});
-	
-	<!-- 검색 기능 -->
-	$(document).ready(function(){
-		$("#search_input").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("tbody tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
-		});
-	});
-</script>
+
 <style>
 	*{font-family: 'MaruBuri';}
 	html,body{height:100vh;postion:relative;}
 	#wrap{margin:0; padding:0;}
 	.bi-search, .btn{border: 1px solid #C38F5C; color:white; background-color:#C38F5C;}
 	.carousel-inner{margin:0 auto;}
-	.card{float:left;width:29%; height:450px; margin:3% 2% 3% 2%; }
+	.card{margin:0 auto; width:33%; max-width:600px;}
 	#wrap{width:100%;min-height: 100%;}
 	#navbar{}
 	
@@ -58,20 +44,60 @@
 	/*반응형 스타일 적용하기*/
 	/*320px ~ 600px*/
 	/* all,screen, print, tv, projection... */
-	@media all and (min-width:320px) and (max-width:600px) {
-		.card{height:42vh;}
+	@media all and (min-width:320px) and (max-width:500px) {
+		.card{width:50%; height:260px;}
+	@media all and (min-width:501px) and (max-width:600px) {
+		.card{width:33%; height:295px;}
+	}
 	@media all and (min-width:601px) and (max-width:700px){
-		.card{height:38vh;}
+		.card{width:33%; height:38vh;}
 	}
 	/*601px~ 900px*/
 	@media all and (min-width:701px) and (max-width:900px){
-		.card{height:35vh;}
+		.card{width:33%; height:35vh;}
 	}
 	@media all and (min-width:901px){
-		.card{height:30vh;}
+		.card{width:33%; width:300px; }
+
 	}
 	
 </style>
+<script>
+	$(function(){
+		$("#footer_year").text(new Date().getFullYear());
+	});
+	
+	<!-- 검색 기능 -->
+	$(document).ready(function(){
+		$("#search_input").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("tbody tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+		$("button[name=club_join_btn]").on("click",function(){
+			var url = "${url}/main/club/submit"
+			var clubno = $(this).attr("data-no");
+				console.log(clubno);
+
+			$.ajax({
+				url:url,
+				type:"POST",
+				dataType : "JSON",
+				data : {
+					clubno : clubno,
+				},success:function(data){
+					alert(data.msg);
+				}
+				,error: function(e){
+					alert(e.msg);
+					console.log(e);
+				}
+			});
+			
+		});
+	});
+</script>
 </head>
 <body>
 <div class="container-fluid" id="wrap">
@@ -99,40 +125,20 @@
 			</div>
 		</div>
 		<div id="joined_group">
-			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-			
+			<div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
 			  <div class="carousel-inner">
-			  <c:forEach   begin="0" items="${clublist}"  step="3" varStatus="status">
-			  	<div class="carousel-item active">  
-				<li>${status.index}</li>
-			  	<li>${status.index+1}</li>
-			  	<li>${status.index+2}</li>
-					<div class="card mb-3" onclick="location.href='${url}/main/club/${clublist.get(staus.index).no}'">
-					  <img src="${url}/static/img/${clublist[staus.index].clubthumbnail}" class="card-img-top" alt="...">
+			  <c:forEach var="vo" items="${clublist}" step="1" varStatus="status">
+			  <c:if test="${status.first}"> <div class="carousel-item active"></c:if>
+			  <c:if test="${!status.first}"> <div class="carousel-item"></c:if>
+					<div class="card mb-3" onclick="location.href='${url}/main/club/${vo.no}'">
+					  <img src="${url}/static/img/${vo.clubthumbnail}" class="card-img-top" alt="...">
 					  <div class="card-body">
-					    <h5 class="card-title">${status.index}</h5>
-					    <p class="card-text">${status.index}</p>
-					    <p class="card-text"><small class="text-muted">인원:${clublist.get(staus.index).clubmember} 리뷰:${clublist.get(staus.index).clubpost}	</small></p>
-					  </div>
-					</div>
-					<div class="card mb-3" onclick="location.href='${url}/main/club/${clublist.get(staus.index+1).no}'">
-					  <img src="${url}/static/img/${clublist[status.index+1].clubthumbnail}" class="card-img-top" alt="...">
-					  <div class="card-body">
-					    <h5 class="card-title">${status.index+1}</h5>
-					    <p class="card-text">${clublist.get(staus.index+1).description}</p>
-					    <p class="card-text"><small class="text-muted">인원:${clublist.get(staus.index+1).clubmember} 리뷰:${clublist.get(staus.index+1).clubpost}	</small></p>
-					  </div>
-					</div>
-					<div class="card mb-3" onclick="location.href='${url}/main/club/${clublist.get(staus.index+2).no}'">
-					   <img src="${url}/static/img/${clublist.get(staus.index+2).clubthumbnail}" class="card-img-top" alt="...">
-					  <div class="card-body">
-					    <h5 class="card-title">${status.index+2}</h5>
-					    <p class="card-text">${clublist.get(staus.index+2).description}</p>
-					    <p class="card-text"><small class="text-muted">인원:${clublist.get(staus.index+2).clubmember} 리뷰:${clublist.get(staus.index+2).clubpost}	</small></p>
+					    <h5 class="card-title">${vo.clubid}</h5>
+					    <p class="card-text">${vo.description}</p>
+					    <p class="card-text"><small class="text-muted">인원:${vo.clubmember} 리뷰:${vo.clubpost}	</small></p>
 					  </div>
 					</div>
 			    </div>
-			  
 			  </c:forEach>
 			  </div><!-- inner end -->
 			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -149,20 +155,20 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th scope="col" style="width:7%;">#</th>
+			      <th scope="col" style="width:10%;">#</th>
 			      <th scope="col" style="width:23%;">그룸 이름</th>
-			      <th scope="col" style="width:21%;">설명</th>
-			      <th scope="col" style="width:14%;">인원수</th>
-			      <th scope="col" style="width:14%;">리뷰수</th>
+			      <th scope="col" style="width:20%;">설명</th>
+			      <th scope="col" style="width:13%;">인원수</th>
+			      <th scope="col" style="width:13%;">리뷰수</th>
 			      <th scope="col" style="width:21%;">그룹 생성일</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <c:forEach var="vo" items="${clublistPublic}">
-			   <tr onclick="location.href='${url}/main/club/${vo.no}'">
-			  	 <th scope="row">${vo.no}</th>
-			      <td>${vo.clubid}</td>
-			      <td>${vo.description}</td>
+			   <tr>
+			  	 <th scope="row"><button class="btn btn-sm" name="club_join_btn" data-no="${vo.no}">가입</button></th>
+			      <td onclick="location.href='${url}/main/club/${vo.no}'">${vo.clubid}</td>
+			      <td onclick="location.href='${url}/main/club/${vo.no}'">${vo.description}</td>
 			      <td>${vo.clubmember}</td>
 			      <td>${vo.clubpost }개</td>
 			      <td>${vo.createdate }</td>

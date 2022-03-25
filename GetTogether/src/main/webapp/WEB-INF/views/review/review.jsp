@@ -66,6 +66,8 @@
 	});
 	
 	$(document).ready(function(){
+		console.log("인원 수 "+ ${rvo.people});
+		
 		$(document).on('click',"#list_btn",function(){
 			location.href="group_info.html";
 			if(flag_map == false) return;
@@ -88,7 +90,37 @@
 			location.href='review_form.html';
 		})
 		
-	
+		// 평점 설정
+		var score = parseInt(${rvo.score});
+		$("#"+score+"-stars").prop("checked",true);
+		
+		
+		//리뷰삭제	
+		$(document).on("click", "#review_delete_btn",function(){
+			var url = "${url}/main/review/deleteOk";
+			var no = ${rvo.no}
+			var clubno = ${cvo.no};
+			$.ajax({
+				url : url,
+				type :"POST",
+				dataType : "JSON",
+				data: {
+					no : no,
+					clubno : clubno,
+				},
+				success: function(data){
+					console.log(data.msg);
+					console.log(data.status);
+					console.log(data);
+					window.location.href=data.redirect;
+				}
+				,error: function(e){
+					console.log("실패");
+					console.log(e);
+					window.location.href=e.redirect;
+				}
+			});
+		});
 	});
 	
 
@@ -99,7 +131,7 @@
 <div class="container-fluid" id="wrap">
 		<nav id="navbar" class="navbar navbar-expand-lg navbar-light">
 			<div class="container-fluid">
-				<a id="brand_logo" class="navbar-brand" href="main.html"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
+				<a id="brand_logo" class="navbar-brand" href="${url}/main"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
 				<button class="navbar-toggler" id="naver_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_toggle" >
 				<span class="navbar-toggler-icon"></span>
 				</button>
@@ -124,7 +156,6 @@
 					<li class="list-group-item">그룹장 : ${clubadmin}</li>
 					<li class="list-group-item">인원	: ${cvo.clubmember} 명</li>
 					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
-					<li class="list-group-item" >평균 평점 : 4.5 </li>
 					<li class="list-group-item" >
 						
 								공지사항 입니다.
@@ -158,10 +189,15 @@
 								  <i  class=" dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
 								    <span class="visually-hidden">Toggle Dropright</span>
 								  </i>
-								  <ul class="dropdown-menu">
-								    <li class="dropdown-item">수정하기</li>
-								    <li class="dropdown-item">삭제하기</li>
+								  <c:if test="${rvo.userid == logId}">
+								   <ul class="dropdown-menu">
+								    <li class="dropdown-item"  onclick="location.href='${url}/main/club/${clubno}/review/${reivewno}/edit'" >수정하기</li>
+								    <li class="dropdown-item" id="review_delete_btn">삭제하기</li>
 								  </ul>
+								 
+								  
+								  
+								  </c:if>
 								</div>
 							</div>
 						</div>
@@ -170,12 +206,12 @@
 					<div id="review_section">
 						<div> <!-- 사용자 입력 데이터  -->
 							<ul class="list-group list-group-flush">
-								<li >방문 인원 : ${rvo.people }</li>
-								<li>재방문 의사 :
+								<li >방문 인원 : ${rvo.people}</li>
+								<li>재방문 의사 : 
 									<c:if test="${rvo.revisit}"> 있음</c:if>
 									<c:if test="${rvo.revisit == false}"> 없음</c:if>
 								</li>
-								<li>방문날짜 : ${rvo.visitdate }</li>
+								<li>방문날짜 : ${rvo.visitdate } ${rvo.people} ${rvo.people}</li>
 								<li>SNS링크 : <a href="${rvo.link}">이동하기</a></li>
 								<li><i class="bi bi-pin-map"></i><a href="#">${rvo.location}</a></li>
 								<li id="reivew_section_score"> 
@@ -184,7 +220,7 @@
 											<div class="star-rating"> 
 											  <input type="radio" id="5-stars" class="form-control" name="rating" value="5" />
 											  <label for="5-stars" class="star">&#9733;</label>
-											  <input type="radio" id="4-stars" name="rating" value="4" checked/>
+											  <input type="radio" id="4-stars" name="rating" value="4"/>
 											  <label for="4-stars" class="star">&#9733;</label>
 											  <input type="radio" id="3-stars" name="rating" value="3" />
 											  <label for="3-stars" class="star">&#9733;</label>

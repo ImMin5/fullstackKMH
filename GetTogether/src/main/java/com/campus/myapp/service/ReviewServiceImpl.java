@@ -26,8 +26,18 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public ReviewVO reviewSelectOne(int no) {
-		return dao.reviewSelectOne(no);
+	public ReviewVO reviewSelectOne(int no,int clubno) {
+		return dao.reviewSelectOne(no,clubno);
+	}
+
+	@Override
+	public int reviewDelete(int no) {
+		return dao.reviewDelete(no);
+	}
+
+	@Override
+	public int reviewUpdate(ReviewVO vo) {
+		return dao.reviewUpdate(vo);
 	}
 	
 }

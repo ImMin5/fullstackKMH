@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="${url}/static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>양재동 수제버거 맛집 | Get Together</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,21 +14,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-
-<script>
-	var flag_map = false;
-	
-	$(function(){
-		$("#footer_year").text(new Date().getFullYear());
-	});
-	
-	$(document).ready(function(){
-		
-	});
-	
-
-	
-</script>
 <style>
 	*{font-family: 'MaruBuri';}
 	html,body{height:100vh;postion:relative;}
@@ -52,19 +37,108 @@
 	footer{}
 	
 </style>
+<script>
+	var flag_map = false;
+	
+	$(function(){
+		$("#footer_year").text(new Date().getFullYear());
+	});
+	
+	$(document).ready(function(){
+		
+		//리뷰삭제
+		$(document).on("click", "button[name=review_delete_btn]",function(){
+			var url = "${url}/main/review/deleteOk";
+			var no = $(this).attr("data-no");
+			var clubno = ${cvo.no};
+			$.ajax({
+				url : url,
+				type :"POST",
+				dataType : "JSON",
+				data: {
+					no : no,
+					clubno : clubno,
+				},
+				success: function(data){
+					console.log(data.msg);
+					console.log(data.status);
+					console.log(data);
+					window.location.reload();
+				}
+				,error: function(e){
+					alert("게시물 삭제 실패");
+					
+				}
+			});
+		});
+		
+		//멤버 수락
+		$(document).on("click", "button[name=clubmember_accept_btn]",function(){
+			var url = "${url}/main/club/accept";
+			var userid =$(this).attr("data-userid");
+			var clubid ="${cvo.clubid}";
+			var clubno =${cvo.no};
+			var ivno = $(this).attr("data-no");
+			
+			$.ajax({
+				url:url,
+				type : "POST",
+				dataType : "JSON",
+				data : {
+					userid:userid,
+					clubid:clubid,
+					clubno:clubno,
+					ivno: ivno,
+				},
+				success: function(data){
+					alert(data.msg);
+					window.location.reload();
+				},
+				error: function(e){
+					alert(e.msg);
+				}
+			});
+		});
+		
+		//멤버 거절
+		$(document).on("click", "button[name=clubmember_rejcet_btn]",function(){
+			var url = "${url}/main/club/rejcet";
+			var ivno = $(this).attr("data-no");
+			
+			$.ajax({
+				url:url,
+				type : "POST",
+				dataType : "JSON",
+				data : {
+					ivno: ivno,
+				},
+				success: function(data){
+					alert(data.msg);
+					window.location.reload();
+				},
+				error: function(e){
+					alert(e.msg);
+				}
+			});
+		});
+	});
+	
+
+	
+</script>
 </head>
 <body>
 <div class="container-fluid" id="wrap">
 		<nav id="navbar" class="navbar navbar-expand-lg navbar-light">
 			<div class="container-fluid">
-				<a id="brand_logo" class="navbar-brand" href="main.html"><img src="static/logo/horizontal_logo.png" width="130" alt=""></a>
+				<a id="brand_logo" class="navbar-brand" href="${url}/main"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
 				<button class="navbar-toggler" id="naver_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_toggle" >
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
 					<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="mypage.html">마이페이지</a></li>
-					<li class="nav-item"><a class="nav-link" href="index.html">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link" href="${url}/main/mypage">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="${url}/member/logout">로그아웃</a></li>
 					</ul>
 				</div>
 				
@@ -73,19 +147,21 @@
 	<main id="main">
 		<div class="row">
 			<div class="col-4">
-				<div class="rounded mx-auto d-block" onclick="location.href='group_info.html'">
-	  				<img id="group_thubnail" src="static/img/hamburger_01.jpg"  alt="커버사진">
+				<div class="rounded mx-auto d-block" onclick="location.href='${url}/main/club/${clubno}'">
+	  				<img id="group_thubnail" src="${url}/static/img/${cvo.clubthumbnail}"  alt="커버사진">
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item" >양재동 수제버거 맛집</li>
-					<li class="list-group-item">생성일 : 2021.02.02</li>
-					<li class="list-group-item">그룹장 : gildong</li>
-					<li class="list-group-item">인원	: 30명</li>
-					<li class="list-group-item">리뷰 수 : 12개 </li>
-					<li class="list-group-item" >평균 평점 : 4.5 </li>
+					<li class="list-group-item" >${cvo.clubid}</li>
+					<li class="list-group-item">생성일 : ${cvo.createdate }</li>
+					<li class="list-group-item">그룹장 : ${clubadmin}</li>
+					<li class="list-group-item">인원	: ${cvo.clubmember} 명</li>
+					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
 					<li class="list-group-item" >
 						
 								공지사항 입니다.
+								<c:if test="${cvo.clubnotice != null}">
+									${cvo.clubnotice}
+								</c:if>
 					
 					</li>
 					
@@ -97,11 +173,11 @@
 					<h5 class="title">그룹 정보 </h5>
 					<form id="groupinfo_section_form">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" value="양재동 수제버거 맛집"/>
+							<input type="text" class="form-control" value="${cvo.clubid}"/>
 							<input type="button" class="btn" value="변경"/>
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" value="공지사항 입니다." placeholder="공지사항 "/>
+							<input type="text" class="form-control" value="${cvo.clubnotice }" placeholder="공지사항 "/>
 							<input type="button" class="btn" id="userid_check_btn" value="변경"/>
 						</div>
 					</form>
@@ -112,30 +188,25 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>이름</th>
+								<th>아이디</th>
+								<th>닉네임</th>
 								<th>가입일</th>
 							<th style="min-width:62px;" >비고</th>
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach var="vo" items="${clubmemberlist}">
 							<tr>
-								<td>2</td>
-								<td>gildong12345</td>
-								<td>2022.02.01</td>
+								<td>${vo.no}</td>
+								<td>${vo.userid}</td>
+								<td>${vo.username}</td>
+								<td>${vo.joindate}</td>
 								<td>
 									<button class="btn btn-sm">강퇴</button>
 									<button class="btn btn-sm">양도</button>
 								</td>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>jisung12</td>
-								<td>2022.01.01</td>
-								<td>
-									<button class="btn btn-sm">강퇴</button>
-									<button class="btn btn-sm">양도</button>
-								</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -154,24 +225,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td onclick="location.href='review.html'">양재동 치즈버거 잘하는 집</td>
-								<td>gildong12345</td>
-								<td>2022.02.01</td>
+						<c:forEach var="vo" items="${reviewlist}">
+						<tr>
+								<td>${vo.no}</td>
+								<td onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'">${vo.subject}</td>
+								<td>${vo.username}</td>
+								<td>${vo.writedate}</td>
 								<td>
-									<button class="btn btn-sm">삭제</button>
+									<button class="btn btn-sm" data-no="${vo.no}" name="review_delete_btn">삭제</button>
 								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td onclick="location.href='review.html'"  >치킨 버거 맛있네요...</td>
-								<td>jisung12</td>
-								<td>2022.01.01</td>
-								<td>
-									<button class="btn btn-sm">삭제</button>
-								</td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -184,20 +248,25 @@
 							<tr>
 								<th>#</th>
 								<th scope="col">아아디</th>
+								<th scope="col">닉네임</th>
 								<th scope="col">요청 시간</th>
 								<th scope="col" style="min-width:62px;" >비고</th>
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="vo" items="${submitlist}">
 							<tr>
-								<td>1</td>
-								<td>jinsu</td>
-								<td>2020.01.01 12:00:00</td>
+								<td>${vo.no}</td>
+								<td>${vo.userid}</td>
+								<td>${vo.username }</td>
+								<td>${vo.createdate }</td>
 								<td id="option_btn">
-									<button class="btn btn-sm">수락</button>
-									<button class="btn btn-sm">거절</button>
+									<button name="clubmember_accept_btn" class="btn btn-sm" data-no="${vo.no}" data-userid="${vo.userid}">수락</button>
+									<button name="clubmember_rejcet_btn" class="btn btn-sm" data-no="${vo.no}">거절</button>
 								</td>
-							</tr>
+							</tr>						
+						</c:forEach>
+							
 						</tbody>
 					</table>
 				</div>
@@ -209,27 +278,23 @@
 							<tr>
 								<th>#</th>
 								<th>아이디</th>
+								<th>초대한 사람</th>
 								<th>요청 시간</th>								
 								<th style="min-width:62px;">비고</th>
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="vo" items="${invitelist}">
 							<tr>
-								<td>1</td>
-								<td>ronaldo9</td>
-								<td>2022.01.01 12:00:00</td>
+								<td>${vo.no}</td>
+								<td>${vo.userid }</td>
+								<td>${vo.username }</td>
+								<td>${vo.createdate }</td>
 								<td>
-									<button class="btn btn-sm" disabled>거절</button>
+									<button class="btn btn-sm" disabled>대기</button>
 								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>sonny</td>
-								<td>2022.01.02 14:00:00</td>
-								<td>
-									<button class="btn btn-sm" disabled>수락</button>
-								</td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>

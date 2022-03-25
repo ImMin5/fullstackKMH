@@ -17,18 +17,17 @@ public class ReviewVO {
 	private boolean revisit;
 	private float score;
 	
-	
-	public int getClubno() {
-		return clubno;
-	}
-	public void setClubno(int clubno) {
-		this.clubno = clubno;
-	}
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public int getClubno() {
+		return clubno;
+	}
+	public void setClubno(int clubno) {
+		this.clubno = clubno;
 	}
 	public String getUserid() {
 		return userid;
@@ -108,7 +107,4 @@ public class ReviewVO {
 	public void setScore(float score) {
 		this.score = score;
 	}
-	
-	
-	
 }

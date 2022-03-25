@@ -7,5 +7,7 @@ import com.campus.myapp.vo.ClubMemberVO;
 public interface ClubMemberService {
 	public int clubMemberInsert(ClubMemberVO vo);
 	public List<ClubMemberVO>  clubMemberSelect(String userid);
-	public int clubMemberCheck(String userid, int clubid);
+	public Integer clubMemberCheck(String userid, int clubid);
+	public ClubMemberVO clubMemberSelectOne(String userid, int clubno);
+	public List<ClubMemberVO> clubMemberSelectAll(int clubno);
 }

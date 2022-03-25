@@ -24,18 +24,40 @@
   		where clubadmin =#{param1} and clubid=#{param2}
   	</select>
   	<select id="clubSelectPublic" resultType="com.campus.myapp.vo.ClubVO">
-  		select no, clubid, clubadmin, clubpost, clubmember, date_format(createdate,'%Y.%m.%d') createdate
+  		select no, clubid, clubadmin, clubpost, clubmember, date_format(createdate,'%Y-%m-%d') createdate
   		,description, ispublic
   		from club
   		where ispublic=${param1} || clubid in (select clubid from clubmember where userid=#{param2})
   	</select>
   	<select id="clubSelectMember" resultType="com.campus.myapp.vo.ClubVO">
-  		select no, clubid, clubadmin, clubpost, clubmember, clubnotice, date_format(createdate,'%Y.%m.%d') createdate, 
+  		select no, clubid, clubadmin, clubpost, clubmember, clubnotice, date_format(createdate,'%Y-%m-%d') createdate, 
   			 clubthumbnail,description,ispublic
   		from club
   		where no=(select clubno from clubmember where userid=#{param1} and clubno=${param2})
   	</select>
   	<update id="clubUpdatePost">
-  		update club set clubpost = clubpost+1 where no=#{param1}
+  		update club set clubpost = (select count(no) from review where clubno = #{param1})
+  	</update>
+  	<update id="clubUpdateMember">
+  		update club set clubmember = (select count(no) from clubmember where clubno = #{param1})
+  	</update>
+  	<insert id="clubInsertInvite" parameterType="com.campus.myapp.vo.ClubInviteVO">
+  		insert into clubinvite(userid, username, clubno, clubid, invite, submit, complete)
+  		values(#{userid}, #{username}, ${clubno}, #{clubid}, ${invite}, ${submit}, ${complete})
+  	</insert>
+  	<select id="clubInviteSelect" resultType="com.campus.myapp.vo.ClubInviteVO">
+  		select no , userid, username, clubno, clubid, invite, submit, complete, date_format(createdate,'%Y-%m-%d') createdate
+  		from clubinvite
+  		where userid=#{param1} and clubno=${param2}
+  	</select >
+  	<select id="clubInviteSelectIsInvite" resultType="com.campus.myapp.vo.ClubInviteVO">
+  		select no , userid, username, clubno, clubid, invite, submit, complete, date_format(createdate,'%Y-%m-%d %h:%m:%s') createdate
+  		from clubinvite
+  		where clubno=#{param1} and invite=${param2} and complete=false
+  	</select>
+  	<update id="clubInviteUpdateComplete">
+  		update clubinvite 
+  		set complete = true
+  		where no=${param1}
   	</update>
   </mapper>
