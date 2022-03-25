@@ -218,7 +218,6 @@
 					<li class="list-group-item">그룹장 : ${clubadmin}</li>
 					<li class="list-group-item">인원	: ${cvo.clubmember} 명</li>
 					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
-					<li class="list-group-item" >평균 평점 : 4.5 </li>
 					<li class="list-group-item" >
 						
 								공지사항 입니다.
@@ -263,11 +262,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_invite" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">멤버 초대 </h5>
+        <h5 class="modal-title">멤버 초대 </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -276,7 +275,7 @@
 			</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
         <button type="button" class="btn">초대하기</button>
       </div>
     </div>

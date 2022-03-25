@@ -27,8 +27,18 @@ public class ClubMemberServiceImpl implements ClubMemberService {
 	}
 
 	@Override
-	public int clubMemberCheck(String userid, int clubid) {
+	public Integer clubMemberCheck(String userid, int clubid) {
 		return dao.clubMemberCheck(userid, clubid);
+	}
+
+	@Override
+	public ClubMemberVO clubMemberSelectOne(String userid, int clubno) {
+		return dao.clubMemberSelectOne(userid, clubno);
+	}
+
+	@Override
+	public List<ClubMemberVO> clubMemberSelectAll(int clubno) {
+		return dao.clubMemberSelectAll(clubno);
 	}
 	
 }

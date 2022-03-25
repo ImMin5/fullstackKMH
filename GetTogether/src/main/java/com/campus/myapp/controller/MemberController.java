@@ -106,7 +106,7 @@ public class MemberController {
 	@ResponseBody
 	public String usernameCheck(String username){
 		System.out.println("id check : " + username);
-		int result = service.idCheck(username);
+		int result = service.usernameCheck(username);
 		return Integer.toString(result);
 	}
 	
@@ -133,6 +133,9 @@ public class MemberController {
 		mav.setViewName("member/mypage");
 		return mav;
 	}
+	
+	//
+	
 	//글 수정 메세지
 		public String getSuccessMessage(String msg, String url) {
 			String alert = "<script>";

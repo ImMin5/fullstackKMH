@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="${url}/static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>양재동 수제버거 맛집 | Get Together</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,25 +61,42 @@
 	$(document).ready(function(){
 		$(document).on('click',"#list_btn",function(){
 			location.href="${url}/main/club/${cvo.no}";
-			if(flag_map == false) return;
-			$("#info_section_map").remove();
-			$("#info_section").append("<div id='info_section_table'>테이블</div>");
-			flag_map = false;
 		});
 		
 		
 		$(document).on('click',"#list_map_btn",function(){
 			location.href="${url}/main/club_map/${cvo.no}";
-			if(flag_map == true) return;
-			$("#info_section_table").remove();
-			$("#info_section").append("<div id='info_section_map'>지도</div>");
-			flag_map = true;
+			
 		});
 		
 		// 리뷰 작성 이동
 		$(document).on("click", "#write_btn", function(){
 			location.href='${url}/main/club/${cvo.no}/review_form';
 		})
+		
+		//멤버 ㅊ대
+		$(document).on("click","#modal_btn_invite", function(){
+			var url = "${url}/main/club/invite"
+			var userid = $("#modal_invite_userid").val();
+			var clubno = ${clubno}
+			
+			$.ajax({
+				url:url,
+				type:"POST",
+				dataType: "JSON",
+				data:{
+					userid : userid,
+					clubno : clubno,
+				},
+				success:function(data){
+					alert(data.msg);
+				},
+				error:function(e){
+					alert(data.msg);
+				}
+			})
+		});
+		
 		<!-- 검색 기능-->
 		$("#search_input").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
@@ -100,10 +117,10 @@
 				</button>
 				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
 					<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="${url}/main/myapge">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="${url}/main/mypage">마이페이지</a></li>
 					<li class="nav-item"><a class="nav-link" href="${url}/member/logout">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link"  data-bs-toggle="modal" data-bs-target="#modal_invite" >멤버 초대</a></li>
-					<c:if test="${adminStatus == 'Y'}">
+					<c:if test="${cvo.clubadmin == logId}">
 						<li class="nav-item"><a class="nav-link" href="${url}/main/club/${cvo.no}/admin">그룹관리</a></li>
 					</c:if>
 					</ul>
@@ -123,7 +140,6 @@
 					<li class="list-group-item">그룹장 : ${clubadmin}</li>
 					<li class="list-group-item">인원	: ${cvo.clubmember} 명</li>
 					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
-					<li class="list-group-item" >평균 평점 : 4.5 </li>
 					<li class="list-group-item" >
 						
 								공지사항 입니다.
@@ -167,13 +183,13 @@
 					  <tbody>
 					  <c:forEach var="vo" items="${rvo}">
 					    <tr >
-					      <th scope="row" onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >1</th>
-					      <td  onclick="location.href='review.html'" >${vo.subject}</td>
-					      <td  onclick="location.href='review.html'" >${vo.location}</td>
-					      <td  onclick="location.href='review.html'">${vo.score}</td>
-					      <td  onclick="location.href='review.html'">${vo.visitdate}</td>
-					      <td  onclick="location.href='review.html'">${vo.username}</td>
-					      <td  onclick="location.href='review.html'">${vo.writedate}</td>
+					      <th scope="row" onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >${vo.no}</th>
+					      <td  onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >${vo.subject}</td>
+					      <td  onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'"  >${vo.location}</td>
+					      <td  onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >${vo.score}</td>
+					      <td  onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >${vo.visitdate}</td>
+					      <td  onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >${vo.username}</td>
+					      <td  onclick="location.href='${url}/main/club/${clubno}/review/${vo.no}'" >${vo.writedate}</td>
 					    </tr>
 					  </c:forEach>
 					  </tbody>
@@ -222,12 +238,12 @@
       </div>
       <div class="modal-body">
 			<div class="input-group mb-3">
-				<input type="text" class="form-control" id="modal_userid" placeholder="아이디 입력" maxlength="20">
+				<input type="text" class="form-control" id="modal_invite_userid" placeholder="아이디 입력" maxlength="20">
 			</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn">초대하기</button>
+        <button type="button" id="modal_btn_invite" class="btn">초대하기</button>
       </div>
     </div>
   </div>

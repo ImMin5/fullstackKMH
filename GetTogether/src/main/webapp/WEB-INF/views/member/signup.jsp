@@ -122,7 +122,6 @@
 		}
 		if(reg.test(userid.value) == false){
 			alert("아이디를 잘못 입력하였습니다.");
-			console.log("test");
 			userid.value="";
 			userid.focus();
 			return false;
@@ -132,8 +131,14 @@
 	}
 	
 	function username_reg(username){
+		var reg= /^[a-zA-Z0-9가-힣]{4,20}$/;
+		
 		if(username.value==""){
 			alert("닉네임을 입력해 주세요.");
+			return false;
+		}
+		if(reg.test(username.value) == false){
+			alert("닉네임을 잘못 입력했습니다.\n 영문 대소문자, 한글 ,숫자 , 4-20자리");
 			return false;
 		}
 	}
@@ -177,6 +182,10 @@
 		var passwd_chk = document.getElementById("userpassword_check");
 		
 		
+	
+		if(id_reg(userid) == false) return false;
+		if(passwd_reg(passwd, passwd_chk) == false) return false;
+		if(username_reg(username) == false) return false;
 		if(is_check == false){
 			alert("아이디 중복체크를 해주세요!");
 			return false;
@@ -185,9 +194,6 @@
 			alert("닉네임 중복체크를 해주세요!");
 			return false;
 		}
-		if(id_reg(userid) == false) return false;
-		if(passwd_reg(passwd, passwd_chk) == false) return false;
-		if(username_reg(username) == false) return false;
 	}
 	
 	

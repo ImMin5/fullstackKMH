@@ -50,8 +50,7 @@
 	.star-rating label:hover,.star-rating label:hover ~ label {color:#C38F5C;}
 </style>
 <script>
-	var flag_map = false;
-	var flag_score = false;
+	var flag_score = true;
 	
 	$(function(){
 		$("#footer_year").text(new Date().getFullYear());
@@ -126,11 +125,6 @@
 		
 		//기본 평점 설정
 	
-		// 리뷰 작성 이동
-		$(document).on("click", "#write_btn", function(){
-			location.href='review_form.html';
-		})
-		
 		 $(document).on('click','.star-rating input',function(e){
 			$(this).attr("name","score");
 	        $(this).nextAll("input").attr("name","");
@@ -144,6 +138,22 @@
 	       flag_score=true;
 	    })
 	    
+	    //평점 불러오기
+	    var score=parseInt(${rvo.score});
+	    $("#"+score+"-stars").trigger("click");
+	    if(${rvo.revisit}){
+	    	$("#revisit").trigger("click");
+	    }
+	    //리뷰 수정 취소 버튼
+	    $("#cancel_btn").on("click", function(){
+	    	window.location.href="${url}/main/club/${clubno}";
+	    });
+	    
+		// 재방문 의사
+		$(function(){
+			$("#revisit").prop(${rvo.revisit});
+		});
+		
 	});
 	  
 
@@ -154,7 +164,7 @@
 <div class="container-fluid" id="wrap">
 		<nav id="navbar" class="navbar navbar-expand-lg navbar-light">
 			<div class="container-fluid">
-				<a id="brand_logo" class="navbar-brand" href="main.html"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
+				<a id="brand_logo" class="navbar-brand" href="${url}/main"><img src="${url}/static/logo/horizontal_logo.png" width="130" alt=""></a>
 				<button class="navbar-toggler" id="naver_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_toggle" >
 				<span class="navbar-toggler-icon"></span>
 				</button>
@@ -171,7 +181,7 @@
 		<div class="row">
 			<div class="col-4">
 				<div class="rounded mx-auto d-block" onclick="location.href='${url}/main/club/${clubno}'">
-	  				<img id="group_thubnail" src="${url}/static/img/${cvo.clubthumbnail}"  alt="커버사진">
+	  				<img id="group_thubnail" src="${url}/static/img/hamburger_01.jpg"  alt="커버사진">
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item" >${cvo.clubid}</li>
@@ -191,25 +201,27 @@
 			</div>
 			<div class="col-8">
 				<div class="container">
-					<h3>리뷰 쓰기</h3>
+					<h3>리뷰 수정</h3>
 					<hr/>
-					<form method="post" id="reviewFrm" onsubmit="return review_check();" action="${url}/main/review/reviewOk/${clubno}">
+					<form method="post" id="reviewFrm" onsubmit="return review_check();" action="${url}/main/review/editOk">
+						<input type="hidden" name="no" value="${rvo.no}"/>
+						<input type="hidden" name="clubno" value="${clubno}"/>
 						<div class="mb-3">
-							<input class="form-control" type="text" name="subject" id="subject" placeholder="제목을 입력해 주세요."/>
+							<input class="form-control" type="text" name="subject" id="subject" value="${rvo.subject}" placeholder="제목을 입력해 주세요."/>
 						</div>
 						<div class="mb-3">
-							<input class="form-control" min="1" type="number" name="people" id="people" placeholder="인원수"/>
-							<input class="form-control" type="text" name="link" id="link" placeholder="sns링크"/>
+							<input class="form-control" min="1" type="number" name="people" id="people" value="${rvo.people}" placeholder="인원수"/>
+							<input class="form-control" type="text" name="link" id="link" value="${rvo.link}" placeholder="sns링크"/>
 						</div>
 						<div class="mb-3">
-							<input class="form-control" type="date" name="visitdate" id="visitdate" placeholder="방문 날짜"/>
+							<input class="form-control" type="date" name="visitdate" id="visitdate"  value="${rvo.visitdate }" placeholder="방문 날짜"/>
 						</div>
 						<div class="mb-3">
-							<input class="form-control" type="text" name="location" id="location" placeholder="위치"/>
+							<input class="form-control" type="text" name="location" id="location" value="${rvo.location}" placeholder="위치"/>
 						</div>
 						<div class="input-group mb-3">
 						  <div class="input-group-text" style="background-color:white;">
-						    <input class="form-check-input mt-0" type="checkbox" name="revisit" id="revisit" >
+						    <input class="form-check-input mt-0" type="checkbox" name="revisit" id="revisit">
 						  </div>
 						  <span class="input-group-text" style="background-color:white;">재방문 의사</span>
 						</div>
@@ -229,15 +241,13 @@
 							<span class="input-group-text" style="background-color:white;">평점 </span>
 				        </div>
 						<div class="mb-3">
-							<textarea name="content" id="content" placeholder="내용을 입력하세요.">
-							1. 분위기 : <br/>
-							2. 서비스 : <br/>
-							3. 주차 : <br/>
-							4. 후기 (자유 형식) : <br/> 
+							<textarea name="content" id="content"  placeholder="내용을 입력하세요.">
+							${rvo.content} 
 							</textarea>
 						</div>
 						<div class="mb-3">
-							<input class="btn" type="submit" value="등록"/>
+							<input class="btn" type="submit" id="edit_btn" value="수정"/>
+							<input class="btn" type="submit" id="cancel_btn" value="취소"/>
 						</div>
 					</form>
 				</div>
