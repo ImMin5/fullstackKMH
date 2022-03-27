@@ -138,7 +138,7 @@ public class ReviewController {
 	
 	//review 수정 ok
 	@PostMapping("/main/review/editOk")
-	public ResponseEntity<String> reviewEdit(ReviewVO vo, HttpSession session, HttpServletRequest request){
+	public ResponseEntity<String> reviewEditOk(ReviewVO vo, HttpSession session, HttpServletRequest request){
 		String userid = (String)session.getAttribute("logId");
 		ResponseEntity<String> entity = null;
 		HttpHeaders headers = new HttpHeaders();

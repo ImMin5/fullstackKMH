@@ -15,6 +15,8 @@ public interface ClubDAO {
 	public int clubUpdatePost(int clubno);
 	public int clubUpdateMember(int clubno);
 	public int clubInsertInvite(ClubInviteVO vo);
+	public int clubUpdateInfo(ClubVO vo);
+	public int clubSelectName(String clubid);
 	
 	public ClubInviteVO clubInviteSelect(String userid, int clubno);
 	public List<ClubInviteVO> clubInviteSelectIsInvite(int clubno, boolean invite);

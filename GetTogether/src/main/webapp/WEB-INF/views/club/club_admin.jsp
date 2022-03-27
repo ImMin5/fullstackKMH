@@ -117,7 +117,7 @@
 					window.location.reload();
 				},
 				error: function(e){
-					alert(e.msg);
+					alert(e);
 				}
 			});
 		});
@@ -158,7 +158,7 @@
 					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
 					<li class="list-group-item" >
 						
-								공지사항 입니다.
+								<공지사항><br/>
 								<c:if test="${cvo.clubnotice != null}">
 									${cvo.clubnotice}
 								</c:if>
@@ -171,14 +171,16 @@
 			<div class="col-8">
 				<div id="groupinfo_section" class="container">
 					<h5 class="title">그룹 정보 </h5>
-					<form id="groupinfo_section_form">
+					<form id="groupinfo_section_form" method="post" action="${url}/main/club/editOk">
+						<input type="hidden" name="no" value="${cvo.no}"/>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" value="${cvo.clubid}"/>
-							<input type="button" class="btn" value="변경"/>
+							<input type="text" class="form-control" name="clubid" value="${cvo.clubid}"/>
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" value="${cvo.clubnotice }" placeholder="공지사항 "/>
-							<input type="button" class="btn" id="userid_check_btn" value="변경"/>
+							<input type="text" class="form-control" name="clubnotice" value="${cvo.clubnotice }" placeholder="공지사항 "/>
+						</div>
+						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<input type="submit" class="btn" name="clubid_edit_btn" value="변경"/>
 						</div>
 					</form>
 				</div>

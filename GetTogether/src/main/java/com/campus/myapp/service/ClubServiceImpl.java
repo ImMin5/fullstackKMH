@@ -62,6 +62,14 @@ public class ClubServiceImpl implements ClubService {
 	public int clubInviteUpdateComplete(int no) {
 		return dao.clubInviteUpdateComplete(no);
 	}
+	@Override
+	public int clubUpdateInfo(ClubVO vo) {
+		return dao.clubUpdateInfo(vo);
+	}
+	@Override
+	public int clubSelectName(String clubid) {
+		return dao.clubSelectName(clubid);
+	}
 	
 	
 

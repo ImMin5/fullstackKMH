@@ -212,7 +212,7 @@
 									<c:if test="${rvo.revisit == false}"> 없음</c:if>
 								</li>
 								<li>방문날짜 : ${rvo.visitdate } ${rvo.people} ${rvo.people}</li>
-								<li>SNS링크 : <a href="${rvo.link}">이동하기</a></li>
+								<li>SNS링크 : <a href="${rvo.link}" target="blank">이동하기</a></li>
 								<li><i class="bi bi-pin-map"></i><a href="#">${rvo.location}</a></li>
 								<li id="reivew_section_score"> 
 									<div class="row" style="float:left;">
