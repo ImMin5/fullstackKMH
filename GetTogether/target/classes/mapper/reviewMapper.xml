@@ -26,5 +26,10 @@
   		update review set subject=#{subject}, content=#{content} ,people=${people}, link=#{link}, visitdate=#{visitdate}, location=#{location}, revisit=#{revisit},score=${score} 
   	    where no=${no} and userid=#{userid}
   	</update>
+  	<update id="reviewUpdateUsername">
+  		update review 
+  		set username=#{param2}
+  		where userid=#{param1}
+  	</update>
 
   </mapper>

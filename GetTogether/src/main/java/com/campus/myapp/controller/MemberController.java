@@ -20,6 +20,7 @@ import org.springframework.web.servlet.tags.Param;
 import com.campus.myapp.service.ClubMemberService;
 import com.campus.myapp.service.ClubService;
 import com.campus.myapp.service.MemberService;
+import com.campus.myapp.service.ReviewService;
 import com.campus.myapp.vo.ClubMemberVO;
 import com.campus.myapp.vo.ClubVO;
 import com.campus.myapp.vo.MemberVO;
@@ -29,7 +30,11 @@ public class MemberController {
 	@Inject
 	MemberService service;
 	@Inject
-	ClubMemberService serviceMebmerClub;
+	ClubMemberService serviceCM;
+	@Inject
+	ClubService serviceC;
+	@Inject
+	ReviewService serviceR;
 	
 	//회원가입 view
 	@GetMapping("/signup")
@@ -126,12 +131,63 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		MemberVO vo = service.memberSelectOne(userid);
 		
-		List<ClubMemberVO> clubList = serviceMebmerClub.clubMemberSelect(userid);
+		List<ClubMemberVO> clubList = serviceCM.clubMemberSelect(userid);
+		
 		
 		mav.addObject("clist",clubList);
 		mav.addObject("vo", vo);
 		mav.setViewName("member/mypage");
 		return mav;
+	}
+	
+	
+	//마이페이지 수정
+	@PostMapping("/main/member/editOk")
+	public ResponseEntity<String> memberEditOk(MemberVO mvo, String new_userpassword , HttpSession session, HttpServletRequest request){
+		String userid = (String)session.getAttribute("logId");
+		
+		ResponseEntity<String> entity = null;
+		String msg="";
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type","text/html; charset=utf-8");
+		System.out.println("새로운 비밀번호 : " + new_userpassword);
+		System.out.println("비밀번호 : " + mvo.getUserpassword());
+	
+		
+		try {
+			System.out.println("start !");
+			MemberVO voOrigin = service.memberSelectOne(userid);
+			System.out.println("userid : " + userid);
+			System.out.println("voOrigin : " + voOrigin.getUserpassword());
+			if(voOrigin.getUserpassword().equals(mvo.getUserpassword())) {
+				if(new_userpassword != null && new_userpassword.length() > 0) {
+					System.out.println("비밀번호 변경" + new_userpassword);
+					mvo.setUserpassword(new_userpassword);
+				}
+				mvo.setUserid(userid);
+				int count = service.memberUpdate(mvo);
+				count += serviceR.reviewUpdateUsername(userid, mvo.getUsername());
+				count += serviceCM.clubMemberUpdateUsername(userid,mvo.getUsername());
+				count += serviceC.clubInviteUpdateUsername(userid, mvo.getUsername());
+				session.setAttribute("logName", mvo.getUsername());
+				System.out.println("변경된 데이터 수 : " + count);
+				msg = getSuccessMessage("회원정보 변경 완료",request.getContextPath()+"/main/mypage");
+				entity = new ResponseEntity<String>(msg,headers, HttpStatus.OK);
+			}
+			else {
+				msg = getSuccessMessage("비밀번호가 일치하지 않습니다.",request.getContextPath()+"/main/mypage");
+				entity = new ResponseEntity<String>(msg,headers, HttpStatus.OK);
+			}
+			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			msg = getFailMessage("회원정보 변경 실패");
+			entity = new ResponseEntity<String>(msg,headers, HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 	
 	//

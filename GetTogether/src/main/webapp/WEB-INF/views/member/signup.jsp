@@ -83,7 +83,10 @@
 
 				var url = "${url}/member/usernameCheck";
 				var username = $("#username").val();
-				
+				if(username ==""){
+					alert("닉네임을 입력해 주세요.");
+					return false;
+				}
 				$.ajax({
 					url : url,
 					type : "POST",

@@ -14,6 +14,7 @@ import com.campus.myapp.vo.ClubVO;
 public class ClubServiceImpl implements ClubService {
 	@Inject
 	ClubDAO dao;
+	
 	@Override
 	public int clubInsert(ClubVO vo) {
 		return dao.clubInsert(vo);
@@ -61,6 +62,22 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int clubInviteUpdateComplete(int no) {
 		return dao.clubInviteUpdateComplete(no);
+	}
+	@Override
+	public int clubUpdateInfo(ClubVO vo) {
+		return dao.clubUpdateInfo(vo);
+	}
+	@Override
+	public int clubSelectName(String clubid) {
+		return dao.clubSelectName(clubid);
+	}
+	@Override
+	public int clubDeleteMember(int no, int clubno) {
+		return dao.clubDeleteMember(no, clubno);
+	}
+	@Override
+	public int clubInviteUpdateUsername(String userid, String username) {
+		return dao.clubInviteUpdateUsername(userid, username);
 	}
 	
 	

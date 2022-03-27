@@ -197,7 +197,7 @@
 				</button>
 				<div class="nav justify-content-end navbar-collapse collapse" id="navbar_toggle">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${url}/mypage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" href="${url}/main/mypage">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="${url}/member/logout">로그아웃</a></li>
 						<li class="nav-item"><a class="nav-link"  data-bs-toggle="modal" data-bs-target="#modal_invite" >멤버 초대</a></li>
 						<li class="nav-item"><a class="nav-link" href="${url}/main/club/${cvo.no}/admin">그룹관리</a></li>
@@ -220,7 +220,7 @@
 					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
 					<li class="list-group-item" >
 						
-								공지사항 입니다.
+								<공지사항><br/>
 								<c:if test="${cvo.clubnotice != null}">
 									${cvo.clubnotice}
 								</c:if>

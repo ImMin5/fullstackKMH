@@ -40,5 +40,10 @@ public class ClubMemberServiceImpl implements ClubMemberService {
 	public List<ClubMemberVO> clubMemberSelectAll(int clubno) {
 		return dao.clubMemberSelectAll(clubno);
 	}
+
+	@Override
+	public int clubMemberUpdateUsername(String userid, String username) {
+		return dao.clubMemberUpdateUsername(userid, username);
+	}
 	
 }

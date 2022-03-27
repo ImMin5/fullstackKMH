@@ -115,7 +115,7 @@
 					<input type="text" class="form-control" name="description" id="description" placeholder="그룹 설명" maxlength="50">
 				</div>
 				<div class="mb-3">
-					<input class="form-check-input" type="radio" name="ispublic" id="group_btn_public">
+					<input class="form-check-input" type="checkbox" name="ispublic" id="group_btn_public">
 					<label class="form-check-label" >공개</label>
 			  	</div>
 				<div class="mb-3">
