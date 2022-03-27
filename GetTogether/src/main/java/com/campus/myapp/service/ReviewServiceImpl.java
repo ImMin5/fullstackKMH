@@ -39,5 +39,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public int reviewUpdate(ReviewVO vo) {
 		return dao.reviewUpdate(vo);
 	}
+
+	@Override
+	public int reviewUpdateUsername(String userid, String username) {
+		return dao.reviewUpdateUsername(userid, username);
+	}
 	
 }

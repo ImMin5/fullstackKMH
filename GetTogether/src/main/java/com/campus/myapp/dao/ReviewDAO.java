@@ -10,4 +10,5 @@ public interface ReviewDAO {
 	public ReviewVO reviewSelectOne(int no,int clubno);
 	public int reviewDelete(int no);
 	public int reviewUpdate(ReviewVO vo);
+	public int reviewUpdateUsername(String userid, String username);
 }

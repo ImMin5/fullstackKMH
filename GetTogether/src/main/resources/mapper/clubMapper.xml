@@ -72,4 +72,10 @@
   	<delete id="clubDeleteMember">
   		delete from clubmember where no=${param1} and clubno=${param2}
   	</delete>
+  	<update id="clubInviteUpdateUsername">
+  		update clubinvite
+  		set username=#{param2}
+  		where userid=#{param1}
+  	</update>
   </mapper>
+  

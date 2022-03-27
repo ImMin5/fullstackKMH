@@ -16,7 +16,8 @@
 
 
 <script>
-	var flag_map = false;
+	
+	var is_username_check = false;
 	
 	$(function(){
 		$("#footer_year").text(new Date().getFullYear());
@@ -24,18 +25,117 @@
 	});
 	
 	$(document).ready(function(){
-		$("#withdrawal_btn").on("click",function(){
-			console.log("탈퇴");
-			confirm("정말 그룹을 나가시겠습니까?");
+		//닉네임 중복검사
+		$("#username_check_btn").on('click',function(){
+
+				var url = "${url}/member/usernameCheck";
+				var username = $("#username").val();
+				if(username ==""){
+					alert("닉네임을 입력해 주세요.");
+					return false;
+				}
+				else if(username == "${logId}"){
+					is_username_check=true;
+					return false;
+				}
+				$.ajax({
+					url : url,
+					type : "POST",
+					dataType : "JSON",
+					data : {
+						username : username 
+					},success: function(data){
+						if(data == "0"){
+							console.log(data);
+							alert("사용가능한 닉네임 입니다");
+							is_username_check=true;
+						}
+						else
+							alert("중복된 닉네임 입니다.");
+							
+					},error : function(){
+						alert("통신오류....");
+						is_check = false;
+					}
+				});
+			
 		});
 		
-		//비밀번호 입력해야 닉네임 변경가능
-		
-		$("#")
+		$("#username").on('keyup',function(){is_username_check=false;})
 	});
 	
-
 	
+	function username_reg(username){
+		var reg= /^[a-zA-Z0-9가-힣]{4,20}$/;
+		
+		if(username.value==""){
+			alert("닉네임을 입력해 주세요.");
+			return false;
+		}
+		if(reg.test(username.value) == false){
+			alert("닉네임을 잘못 입력했습니다.\n 영문 대소문자, 한글 ,숫자 , 4-20자리");
+			return false;
+		}
+	}
+	
+	function passwd_reg(passwd,passwd_chk){
+		var reg = /[a-zA-Z0-9]{8,20}/;
+		
+		if(passwd.value =="" && passwd_chk.value == ""){
+			return true;
+		}
+		if(passwd.value==""){
+			alert("비밀번호를 입력해 주세요.");
+			passwd.focus();
+			return false;
+		}
+		if(passwd.value.length<8){
+			alert("비밀번호를 8자 이상 입력해 주세요!");
+			passwd.focus();
+			return false;
+		}
+		if(passwd.value != passwd_chk.value){
+			alert("비밀번호가 동일하지 않습니다.");
+			passwd.focus();
+			return false;
+		}
+		if(passwd_chk.value == ""){
+			alert("비밀번호를 확인해 주세요.");
+			passwd_chk.focus();
+			return false;
+		}
+		if(reg.test(passwd.value) == false){
+			alert("비밀번호를 영문대소문자, 숫자 , !@* 만 사용가능.");
+			passwd.focus();
+			return false;
+		}
+		
+		
+		
+	}
+	
+	function form_check(){
+		var username = $("#username");
+		var userpassword = $("#userpassword");
+		var new_userpassword =document.getElementById("new_userpassword");
+		var new_userpassword_check =document.getElementById("new_userpassword_check");
+		
+		
+		if(userpassword.val() == ""){
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+		
+		if("${logName}" != username.val() && is_username_check == false){
+			console.log(username.val());
+			alert("중복검사를 해주세요");
+			return false;
+		}
+		
+		if("${logName}" == username.val())
+			is_username_check= true;
+		if(passwd_reg(new_userpassword, new_userpassword_check) == false) return false;
+	}
 </script>
 <style>
 	*{font-family: 'MaruBuri';}
@@ -75,23 +175,25 @@
 	<main id="main">
 		<div id="profile_section" class="container">
 			<h5 class="title">프로필</h5>
-			<form id="profile_section_form">
+			<form id="profile_section_form" method="post" onsubmit="return form_check();" action="${url}/main/member/editOk" >
 				<div class="mb-3">
-					<input type="text" class="form-control" name="userid" value="${vo.userid}" readonly/>
+					<input type="text" class="form-control" value="${vo.userid}" readonly/>
 				</div>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" value="${vo.username}" />
-					<input type="button" class="btn" id="username_edit_btn" value="변경"/>
+					<input type="text" class="form-control" id="username" name="username" value="${vo.username}" />
+					<input type="button" class="btn" id="username_check_btn" value="중복체크"/>
 				</div>
 				<div class="mb-3">
-					<input type="text" class="form-control" placeholder="비밀번호"/>
+					<input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="비밀번호"/>
 				</div>
 				<div class="mb-3">
-					<input type="text" class="form-control" placeholder="변경할 비빌먼호" value=""/>
+					<input type="password" class="form-control" id="new_userpassword" name="new_userpassword" placeholder="변경할 비빌먼호" value=""/>
 				</div>
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="변경할 비밀번호 확인"/>
-					<input type="button" class="btn" id="userpassword_edit_btn" value="변경"/>
+				<div class="mb-3">
+					<input type="password" class="form-control" id="new_userpassword_check" name="new_userpassword_check" placeholder="변경할 비밀번호 확인"/>
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<input type="submit" class="btn" name="member_edit_btn" value="변경"/>
 				</div>
 			</form>
 		</div>
