@@ -416,8 +416,71 @@ public class ClubController {
 		return entity;
 		
 	}
-			
 	
+	//클럽 멤버 강퇴
+	@PostMapping("/main/club/memberDelete")
+	public ResponseEntity<HashMap<String, String>> clubMemeberDelete(int no, int clubno, String clubadmin, String userid, HttpSession session,HttpServletRequest request){
+		ResponseEntity<HashMap<String,String>> entity = null;
+		HashMap<String, String> result = new HashMap<>();
+		try {
+			if(userid.equals(clubadmin) == true) {
+				
+				result.put("msg", "관리자 권한을 양도하세요.");
+				result.put("status", "200");
+				entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+				
+			}
+			else {
+				service.clubDeleteMember(no , clubno);
+				service.clubUpdateMember(clubno);
+				result.put("msg", "회원 탈퇴 완료");
+				result.put("status", "200");
+				//result.put("redirect", request.getRequestURL().toString());
+				entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			result.put("msg", "잠시후 다시 시도해 주세요...");
+			result.put("status", "400");
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+			
+	//클럽 host 양ㄷ
+	@PostMapping("/main/club/adminUpdate")
+	public ResponseEntity<HashMap<String, String>> clubAdminUpdate(int clubno, String clubadmin, String userid, String username,  HttpSession session,HttpServletRequest request){
+		ResponseEntity<HashMap<String,String>> entity = null;
+		HashMap<String, String> result = new HashMap<>();
+		try {
+			if(userid.equals(clubadmin) == true) {
+				
+				result.put("msg", "본인에게 양도할 수 없습니다.");
+				result.put("status", "200");
+				entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+				
+			}
+			else {
+				ClubVO cvo = service.clubSelectOne(clubno);
+				cvo.setClubadmin(userid);
+				service.clubUpdateInfo(cvo);
+				result.put("msg", "그룹장 양도 완료");
+				result.put("status", "200");
+				//result.put("redirect", request.getRequestURL().toString());
+				entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			result.put("msg", "잠시후 다시 시도해 주세요...");
+			result.put("status", "400");
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 
 		
 	//글 수정 메세지

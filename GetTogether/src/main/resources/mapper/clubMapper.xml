@@ -62,11 +62,14 @@
   	</update>
   	<update id="clubUpdateInfo">
   		update club
-  		set clubid = #{clubid} , clubnotice=#{clubnotice}
+  		set clubid = #{clubid} , clubnotice=#{clubnotice} , clubadmin=#{clubadmin}
   		where no=${no}
   	</update>
   	<select id="clubSelectName" resultType="int">
   		select count(clubid) from club
   		where clubid=#{param1}
   	</select>
+  	<delete id="clubDeleteMember">
+  		delete from clubmember where no=${param1} and clubno=${param2}
+  	</delete>
   </mapper>

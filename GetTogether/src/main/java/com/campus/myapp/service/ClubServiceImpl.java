@@ -70,6 +70,10 @@ public class ClubServiceImpl implements ClubService {
 	public int clubSelectName(String clubid) {
 		return dao.clubSelectName(clubid);
 	}
+	@Override
+	public int clubDeleteMember(int no, int clubno) {
+		return dao.clubDeleteMember(no, clubno);
+	}
 	
 	
 

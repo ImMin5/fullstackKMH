@@ -121,7 +121,62 @@
 				}
 			});
 		});
-	});
+		//클럽 멤버 강퇴
+		$(document).on("click", "button[name=clubmember_drop_btn]", function(){
+			var no = parseInt($(this).attr("data-no"));
+			var clubno = parseInt("${clubno}");
+			var clubadmin = "${cvo.clubadmin}";
+			var userid = $(this).attr("data-userid");
+			var url ="${url}/main/club/memberDelete";
+			
+			$.ajax({
+				url : url,
+				type : "POST",
+				dataType: "JSON",
+				data : {
+					no : no,
+					clubno : clubno,
+					userid : userid,
+					clubadmin : clubadmin,
+				},
+				success : function(data){
+					alert(data.msg);
+					window.location.reload();
+				},
+				error : function(e){
+					alert(e.msg);
+				}
+			});	
+		});
+			
+		//클럽 호스트 변경
+		$(document).on("click", "button[name=clubadmin_change_btn]", function(){
+			var clubno = parseInt("${clubno}");
+			var clubadmin = "${cvo.clubadmin}";
+			var userid = $(this).attr("data-userid");
+			var username = $(this).attr("data-username");
+			var url ="${url}/main/club/adminUpdate";
+			
+			console.log("update");
+			$.ajax({
+				url : url,
+				type : "POST",
+				dataType: "JSON",
+				data : {
+					clubno : clubno,
+					userid : userid,
+					clubadmin : clubadmin,
+				},
+				success : function(data){
+					alert(data.msg);
+					window.location.reload();
+				},
+				error : function(e){
+					alert(e.msg);
+				}
+			});	
+		});
+	});<!-- end-->
 	
 
 	
@@ -144,7 +199,7 @@
 				
 			</div>
 		</nav>
-	<main id="main">
+	<main id="main" style="overflow:auto;">
 		<div class="row">
 			<div class="col-4">
 				<div class="rounded mx-auto d-block" onclick="location.href='${url}/main/club/${clubno}'">
@@ -184,16 +239,16 @@
 						</div>
 					</form>
 				</div>
-				<div id="member_section" class="container">
+				<div id="member_section" class="table-responsive">
 					<h5 id="member_section_title">멤버 관리 </h5>
-					<table id="member_section_table" class="table">
+					<table id="member_section_table" class="table ">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>아이디</th>
-								<th>닉네임</th>
-								<th>가입일</th>
-							<th style="min-width:62px;" >비고</th>
+								<th style="min-width:30px;" scope="col">#</th>
+								<th style="min-width:100px;" scope="col">아이디</th>
+								<th style="min-width:100px;" scope="col">닉네임</th>
+								<th style="min-width:100px;" scope="col">가입일</th>
+								<th style="min-width:93px;" scope="col">비고</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -204,8 +259,10 @@
 								<td>${vo.username}</td>
 								<td>${vo.joindate}</td>
 								<td>
-									<button class="btn btn-sm">강퇴</button>
-									<button class="btn btn-sm">양도</button>
+									
+									<button class="btn btn-sm" name="clubmember_drop_btn" data-no="${vo.no}" data-userid="${vo.userid}">강퇴</button>
+									<button class="btn btn-sm" name="clubadmin_change_btn" data-clubadmin="${cvo.clubadmin}" data-userid="${vo.userid}" data-username="${vo.username}">양도</button>
+		
 								</td>
 							</tr>
 							</c:forEach>
@@ -214,16 +271,16 @@
 				</div>
 				
 				
-				<div id="post_section" class="container">
+				<div id="post_section" class="table-responsive">
 					<h5 id="post_section_title">리뷰 관리 </h5>
 					<table id="postr_section_table" class="table">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-							<th style="min-width:62px;" >비고</th>
+								<th style="min-width:30px;" >#</th>
+								<th style="min-width:100px;" >제목</th>
+								<th style="min-width:90px;" >작성자</th>
+								<th style="min-width:100px;" >작성일</th>
+							<th style="min-width:100px;" >비고</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -243,16 +300,16 @@
 				</div>
 				
 				<!-- 그룹 가입 요청 현황 -->
-				<div id="invited_section" class="container">
+				<div id="invited_section" class="table-responsive">
 					<h5 id="invited_title">그룹 가입 신청 현황</h5>
 					<table id="invited_section_table" class="table">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th scope="col">아아디</th>
-								<th scope="col">닉네임</th>
-								<th scope="col">요청 시간</th>
-								<th scope="col" style="min-width:62px;" >비고</th>
+								<th style="min-width:30px;" >#</th>
+								<th style="min-width:100px;" scope="col">아아디</th>
+								<th style="min-width:100px;" scope="col">닉네임</th>
+								<th style="min-width:100px;" scope="col">요청 시간</th>
+								<th style="min-width:30px;" scope="col" style="min-width:62px;" >비고</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -273,16 +330,16 @@
 					</table>
 				</div>
 				<!-- 그룹 초대 신청 현황 -->
-				<div id="invited_section" class="container">
+				<div id="invited_section" class="table-responsive">
 					<h5 id="invited_title">그룹 초대 신청 현황</h5>
 					<table id="invited_section_table" class="table">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>아이디</th>
-								<th>초대한 사람</th>
-								<th>요청 시간</th>								
-								<th style="min-width:62px;">비고</th>
+								<th style="min-width:30px;" >#</th>
+								<th style="min-width:100px;">아이디</th>
+								<th style="min-width:100px;">초대한 사람</th>
+								<th style="min-width:100px;">요청 시간</th>								
+								<th style="min-width:100px;">비고</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="${url}/static/logo/favicon.ico" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>양재동 수제버거 맛집 | Get Together</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">

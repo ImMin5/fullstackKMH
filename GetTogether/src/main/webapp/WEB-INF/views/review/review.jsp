@@ -158,7 +158,7 @@
 					<li class="list-group-item">리뷰 수 : ${cvo.clubpost}개</li>
 					<li class="list-group-item" >
 						
-								공지사항 입니다.
+								<공지사항><br/>
 								<c:if test="${cvo.clubnotice != null}">
 									${cvo.clubnotice}
 								</c:if>
