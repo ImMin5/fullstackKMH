@@ -396,8 +396,11 @@ public class ClubController {
 			int result = service.clubSelectName(voNew.getClubid());
 			ClubVO voOrigin = service.clubSelectOne(voNew.getNo());
 			
+			//중복되지 않는 클럽이름 or 클럽이름이 이전과 같음
 			if(result == 0 || voOrigin.getClubid().equals(voNew.getClubid())) {
-				service.clubUpdateInfo(voNew);
+				voOrigin.setClubid(voNew.getClubid());
+				voOrigin.setClubnotice(voNew.getClubnotice());
+				service.clubUpdateInfo(voOrigin);
 				msg = getSuccessMessage("클럽 정보가 성공적으로 변경되었습니다.", requset.getContextPath()+"/main/club/"+voNew.getNo()+"/admin");
 				entity = new ResponseEntity<String>(msg,headers,HttpStatus.OK);
 			}
