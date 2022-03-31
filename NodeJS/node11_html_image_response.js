@@ -23,6 +23,14 @@ var server = http.createServer(function(request, response){
             }
         });
     }
+    else if(addr=='/subpage'){
+        fs.readFile(__dirname+"/subpage.html", "utf-8", function(error, data){
+            if(!error){
+                response.writeHead(200, {"Content-Type":"text/html; charset=utf-8"});
+                response.end(data);
+            }
+        })
+    }
     else if(addr.indexOf('/img') == 0){
        // 이미지일 경우
 

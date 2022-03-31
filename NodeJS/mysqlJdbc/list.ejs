@@ -1,0 +1,44 @@
+!<DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>게시판 목록</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+    ul,li{margin:0; padding:0; list-style-type:none;}
+    .bList li{
+        float:left;
+        width:10%;
+        border-bottom:1px solid gray;
+    }
+    .bList li:nth-child(5n+2){
+        width:60%;
+        white-space: no-wrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+</style>
+</head>
+<body>
+    <a href="">글쓰기</a>
+    총레코드수 : <%=parsing.totalRecord %>, 현재페이지 : <%=parsing.nowPage %>,
+     한페이지 출력 레코드 : <%=parsing.onePageRecord %>,
+      시작페이지 : <%= parsing.startPage %><br/>
+<ul class="bList">
+    <li>번호</li>
+    <li>제목</li>
+    <li>작성자</li>
+    <li>조회수</li>
+    <li>등록일</li>
+    <% for(var r=0; r <results.length; r++){%>
+        <li><%=results[r].no %></li>
+        <li><<a herf="?no<%=results[r].no%>"><%=results[r].subject%</a></li> 
+        <li><%= results[r].userid%></li>
+        <li><%= results[r].hit %></li>
+        <li><%= results[r].writedate %></li>
+    <%}%>
+</ul>
+</body>
+</html>
