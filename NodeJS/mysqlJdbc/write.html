@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <h1>글쓰기</h1>
+    <form method="post" action="/writeOk">
+        글쓴이 : <input type="text" name="userid" value="goguma"/><br/>
+        제목 : <input type="text" name="subject" /><br/>
+        글내용 : <textarea  name="content" cols="50" rows="5"></textarea><br/>
+        <input type="submit" value="글등록"/>
+    </form>
+</body>
+</html>
